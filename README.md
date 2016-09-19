@@ -1,10 +1,52 @@
 # resource-template
 
 [![Code Climate](https://codeclimate.com/github/JeffDeCola/resource-template/badges/gpa.svg)](https://codeclimate.com/github/JeffDeCola/resource-template)
-[![Issue Count](https://codeclimate.com/github/JeffDeCola/resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/resource-template)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
+[![Issue Count](https://codeclimate.com/github/JeffDeCola/resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/resource-template/issues)
 [![Go Report Card](https://goreportcard.com/badge/jeffdecola/resource-template)](https://goreportcard.com/report/jeffdecola/resource-template)
 [![GoDoc](https://godoc.org/github.com/JeffDeCola/resource-template?status.svg)](https://godoc.org/github.com/JeffDeCola/resource-template)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
-A simple concourse resource for testing my code.
+`resource-template` _can be used as for testing and for a tempalte in developing a concourd resource.
 
+## CHECK
+
+blah blah
+
+## IN
+
+blah blah
+
+## OUT
+
+blah blah
+
+## BUILT USING CONCOURSE CI
+
+To automate the creation of the `resource-template` docker image, a concourse ci pipeline
+will unit test, build and push the docker image to dockerhub.
+
+![IMAGE - resource-template concourse ci piepline - IMAGE](docs/resource-template-pipeline.jpg)
+
+A _ci/.credentials.yml_ file needs to be created for your _slack_url_, _repo_github_token_,
+and _dockerhub_password_.
+
+Use fly to upload the the pipeline file _ci/pipline.yml_ to concourse:
+
+```bash
+fly -t ci set-pipeline -p resource-template -c ci/pipeline.yml --load-vars-from ci/.credentials.yml
+```
+
+## CONCOURSE RESOURCES IN PIPELINE
+
+As seen in the pipeline diagram, the _resource-dump-to-dockerhub_ uses the resource type
+[docker-image](https://github.com/concourse/docker-image-resource)
+to push a docker image to dockerhub.
+
+`resource-template` also contains a few extra concourse resources:
+
+* A resource (_resource-slack-alert_) uses a [docker image](https://hub.docker.com/r/cfcommunity/slack-notification-resource)
+  that will notify slack on your progress.
+* A resource (_resource-repo-status_) use a [docker image](https://hub.docker.com/r/dpb587/github-status-resource)
+  that will update your git status for that particular commit.
+
+These resources can be easily removed from the pipeline.
