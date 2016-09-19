@@ -6,5 +6,8 @@ FROM concourse/buildroot:base
 COPY resource-template /
 
 # REQUIRED BY CONCROUSE RESOURCE
-COPY scripts/ /opt/resource/
+COPY scripts/check /opt/resource/check
+COPY scripts/in /opt/resource/in
+COPY scripts/out /opt/resource/out
+
 RUN chmod +x /opt/resource/*

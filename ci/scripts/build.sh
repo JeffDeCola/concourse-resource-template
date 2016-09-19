@@ -1,5 +1,5 @@
 #!/bin/bash
-# resource-template unit-test.sh
+# resource-template build.sh
 
 set -e -x
 
@@ -19,5 +19,20 @@ echo "Gopath is: " $GOPATH
 echo "pwd is: " $PWD
 cd src/github.com/JeffDeCola/resource-template
 
-# RUN unit_tests
-go test -v -cover ./...
+# Put the binary resource-template filename in /dist
+go build -o dist/resource-template ./main.go
+
+# cp the Dockerfile into /dist
+cp ci/Dockerfile dist/Dockerfile
+
+# Check
+echo "List whats in the /dist directory"
+ls -lat dist
+
+# Move to $GOPATH - BECAUSE THIS IS WHERE the resource type docker-image works. 
+# Not really ideal, but it works. 
+cp -R ./dist $GOPATH/.
+cd $GOPATH
+# Check
+echo "List whats in the /dist directory"
+ls -lat dist

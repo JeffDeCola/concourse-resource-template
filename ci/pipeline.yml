@@ -75,11 +75,11 @@ resource_types:
     tag: master
 
 resources:
-- name: resource-template
-  type: git
-  source:
-    uri: https://github.com/jeffdecola/resource-template
-    branch: master
+- name: resource-template                                                                                                                                                                         
+  type: git                                                                                                                                                                                       
+  source:                                                                                                                                                                                         
+    branch: master                                                                                                                                                                                
+    uri: https://github.com/jeffdecola/resource-template 
 - name: resource-dump-to-dockerhub
   type: docker-image
   source:
