@@ -23,7 +23,7 @@ cd src/github.com/JeffDeCola/resource-template
 go build -o dist/resource-template ./main.go
 
 # cp the Dockerfile into /dist
-cp ci/Dockerfile dist/Dockerfile
+cp Dockerfile dist/Dockerfile
 
 # Check
 echo "List whats in the /dist directory"
