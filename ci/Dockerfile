@@ -7,8 +7,8 @@ FROM concourse/buildroot:base
 COPY resource-template /
 
 # REQUIRED BY CONCROUSE RESOURCE
-ADD scripts/check /opt/resource/check
-ADD scripts/in /opt/resource/in
-ADD scripts/out /opt/resource/out
+ADD assets/check /opt/resource/check
+ADD assets/in /opt/resource/in
+ADD assets/out /opt/resource/out
 
 RUN chmod +x /opt/resource/*
