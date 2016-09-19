@@ -1,23 +1,12 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
-
-func addthis(a int, b int) (temp int) {
-	temp = a + b
-	return
-	//comment
-}
+import "fmt"
 
 func main() {
-	var a = 0
+	var a = 2
 	var b = 1
 
-	a = a + 1
-	var sum = addthis(a, b)
-	fmt.Println("Hello, everyone. How are you today.  Are you doing well.", sum)
-	fmt.Println(os.Getenv("GOPATH"))
+	var sum = a + b
+	fmt.Println("Hello everyone. I can count.", sum)
 
 }

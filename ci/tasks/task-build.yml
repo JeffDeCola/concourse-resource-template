@@ -1,0 +1,16 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: golang
+    tag: 1.7.1
+
+inputs:
+- name: resource-template
+
+outputs:
+- name: dist
+
+run:
+  path: ./resource-template/ci/scripts/build.sh
