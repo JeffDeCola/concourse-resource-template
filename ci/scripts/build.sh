@@ -23,16 +23,18 @@ cd src/github.com/JeffDeCola/resource-template
 go build -o dist/resource-template ./main.go
 
 # cp the Dockerfile into /dist
-cp Dockerfile dist/Dockerfile
+cp ci/Dockerfile dist/Dockerfile
 
 # Check
 echo "List whats in the /dist directory"
 ls -lat dist
 
-# Move to $GOPATH - BECAUSE THIS IS WHERE the resource type docker-image works. 
+# Move what you need to $GOPATH - BECAUSE THIS IS WHERE the resource type docker-image works. 
 # Not really ideal, but it works. 
 cp -R ./dist $GOPATH/.
+cp -R ./assets $GOPATH/.
+
 cd $GOPATH
-# Check
-echo "List whats in the /dist directory"
-ls -lat dist
+# Check whats here
+echo "List whats in top directory"
+ls -lat 
