@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/resource-template "out" "$1"

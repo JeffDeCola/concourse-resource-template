@@ -1,0 +1,60 @@
+# resource-template pipeline 
+
+jobs:
+  - name: job-test-app-resource-template
+    plan:
+      - get: resource-template
+        trigger: true
+      - put: resource-slack-alert
+        params:
+          channel: '#jeff-builds'
+          text: "From resource-template: Starting resource-template in concourse."
+      - put: resource-repo-status
+        params: { state: "pending", commit: "resource-template" }
+      - task: task-unit-tests
+        file: resource-template/ci/tasks/task-unit-tests.yml
+        on_success:
+          do:
+          - put: resource-repo-status
+            params: { state: "success", commit: "resource-template" }
+          - put: resource-slack-alert
+            params:
+              channel: '#jeff-builds'
+              text: "From resource-template: This works great!!"
+        on_failure:
+          do:
+          - put: resource-repo-status
+            params: { state: "failure", commit: "resource-template" }
+          - put: resource-slack-alert
+            params:
+              channel: '#jeff-builds'
+              text: "From resource-template: Something went wrong!"
+
+resource_types:
+  - name: slack-notification
+    type: docker-image
+    source:
+      repository: cfcommunity/slack-notification-resource
+      tag: latest
+  - name: github-status
+    type: docker-image
+    source:
+      repository: dpb587/github-status-resource
+      tag: master
+
+resources:
+  - name: resource-template
+    type: git
+    source:
+      uri: https://github.com/jeffdecola/resource-template
+      branch: master
+  - name: resource-slack-alert
+    type: slack-notification
+    source:
+      url: {{slack_url}} 
+  - name: resource-repo-status 
+    type: github-status
+    source:
+      repository: jeffdecola/resource-template 
+      access_token: {{repo_github_token}}
+
