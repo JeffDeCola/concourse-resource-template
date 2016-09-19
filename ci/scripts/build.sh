@@ -6,6 +6,7 @@ set -e -x
 # The code is located in /resource-template
 echo "List whats in the current directory"
 ls -lat 
+echo ""
 
 # Setup the gopath based on current directory.
 export GOPATH=$PWD
@@ -17,6 +18,7 @@ cp -R ./resource-template src/github.com/JeffDeCola/.
 # All set and everything is in the right place for go
 echo "Gopath is: " $GOPATH
 echo "pwd is: " $PWD
+echo ""
 cd src/github.com/JeffDeCola/resource-template
 
 # Put the binary resource-template filename in /dist
@@ -28,13 +30,21 @@ cp ci/Dockerfile dist/Dockerfile
 # Check
 echo "List whats in the /dist directory"
 ls -lat dist
+echo ""
 
-# Move what you need to $GOPATH - BECAUSE THIS IS WHERE the resource type docker-image works. 
-# Not really ideal, but it works. 
+# Move what you need to $GOPATH/dist
+# BECAUSE the resource type docker-image works in /dist.
 cp -R ./dist $GOPATH/.
-cp -R ./assets $GOPATH/.
+cp -R ./assets $GOPATH/dist/.
 
 cd $GOPATH
 # Check whats here
 echo "List whats in top directory"
 ls -lat 
+echo ""
+
+cd $GOPATH
+# Check whats here
+echo "List whats in /dist"
+ls -lat dist
+echo ""
