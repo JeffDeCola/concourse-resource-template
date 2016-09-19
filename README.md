@@ -6,7 +6,7 @@
 [![GoDoc](https://godoc.org/github.com/JeffDeCola/resource-template?status.svg)](https://godoc.org/github.com/JeffDeCola/resource-template)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
-`resource-template` _can be used as for testing and for a tempalte in developing a concourd resource.
+`resource-template` _can be used as a tempalte in developing a concourse ci resource type._
 
 ## CHECK
 
@@ -16,9 +16,21 @@ blah blah
 
 blah blah
 
+### Parameters
+
+* `param1': blah blah
+
+* `param2': blah blah
+
 ## OUT
 
 blah blah
+
+### Parameters
+
+* `param1': blah blah
+
+* `param2': blah blah
 
 ## BUILT USING CONCOURSE CI
 
