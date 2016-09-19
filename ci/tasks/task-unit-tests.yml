@@ -10,4 +10,4 @@ inputs:
 - name: resource-template
 
 run:
-  path: ./resouce-template/ci/scripts/unit-tests.sh
+  path: ./resource-template/ci/scripts/unit-tests.sh
