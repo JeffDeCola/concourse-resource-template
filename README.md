@@ -28,11 +28,11 @@ These are just placeholders thatyou can update.
 
 ### CHECK
 
-blah blah
+_The bash and go scripts are all set to do something._
 
 ### IN
 
-blah blah
+_The bash and go scripts are all set to do something._
 
 #### Parameters
 
@@ -42,13 +42,40 @@ blah blah
 
 ### OUT
 
-The script is all set to do something.
+_The bash and go scripts are all set to do something._
 
 #### Parameters
 
 * `param1`: Just a placeholder.
 
 * `param2`: Just a placeholder.
+
+```yaml
+jobs:
+- name: job-unit-tests
+  plan:
+  - get: hello-go
+    trigger: true
+    ...
+  - put: resource-template
+    params: { param1: "hello jeff", param2: "How are you?" }
+
+resource_types:
+  ...
+- name: jeffs-resource
+  type: docker-image
+  source:
+   repository: jeffdecola/resource-template
+   tag: latest
+
+resources:
+  ...
+- name: resource-template
+  type: jeffs-resource
+  source:
+    source1: foo1
+    source1: foo2
+```
 
 ## BUILT USING CONCOURSE CI
 
