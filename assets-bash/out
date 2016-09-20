@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# NOTE: YOU CAN REMOVE ALL THESE ECHO'S.  I FIND THEM HELPFUL
+
 set -e              # Willexit immediate if command exits with non-zero status
 set -u              # Will print message if variable not set,
 #set -x             # Prints the shell commands +
@@ -16,7 +18,7 @@ echo "List whats in the working directory"
 ls -lat $WORKING_DIR
 echo ""
 
-# We imported tree into the build.
+# We imported tree into the build.  Not needed, but fu to know how to do it.
 cd $WORKING_DIR
 tree
 
@@ -45,18 +47,24 @@ echo "List whats in top directory"
 ls -lat 
 echo ""
 
-# SOME METATDATA
+# SOME METATDATA YOU CAN USE
 #echo "BUILD_ID = $BUILD_ID"
 #echo "BUILD_NAME = $BUILD_NAME"
 #echo "BUILD_JOB_NAME = $BUILD_JOB_NAME"
 #echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
 #echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
 
+# DO SOMETHING **************************************************************************************
+# DO WHATEVER YOU NEED TO DO
+#
+monkey="henry-the-monkey"
+
+
 # OUTPUT **************************************************************************************
 json_output='{
-    "version":{ "timestamp": "$(date +%s)" },
+    "version":{ "timestamp": "'$(date +%s)'" },
     "metadata": [
-        { "name": "commit", "value": "123456" },
+        { "name": "commit", "value": "'$monkey'" },
         { "name": "author", "value": "Jeff DeCola" }
     ]
 }'
@@ -64,4 +72,4 @@ json_output='{
 echo "jason output is $json_output"
 
 # -n don't read any input at all.  Construct froms scratch.
-jq -n "$json_output" >&3
+jq -n "$json_output" < /dev/stdin >&3
