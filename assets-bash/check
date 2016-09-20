@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "NOTHING"
+
+echo "List whats in top directory"
+ls -lat 
+echo ""

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+set -e              # Will ???
+set -u              # Will print message if variable not set,
+#set -x             # Prints the shell commands +
+set -o pipefail     # Fail on a pipline like cmd1 | cmd2 | cmd3, rather then wait
+
+exec 3>&1           # make stdout available as fd 3 for the result
+exec 1>&2           # redirect all output to stderr for logging
+
+uname -a
+
+# Where is the working directory.
+# Path to the directory containing the build's full set of sources as the first argument
+echo "$1 is"
+echo $1
+echo ""
+
+WORKING_DIR=$1
+echo "WORKING_DIR = $WORKING_DIR"
+echo "List whats in the working directory"
+ls -lat $WORKING_DIR
+echo ""
+
+# read stdin (which is json paramter)
+#- M = ???
+# -S =???, 
+# . =  get everything.
+jq -M -S . < /dev/stdin | tee /tmp/input.json    # tee redirects to multiple files.
+
+echo "INPUT IS"
+cat /tmp/input.json
+echo ""
+
+# PARSE THE JSON FILE /tmp/input
+text=$(jq -r .params.text < /tmp/input.json)
+echo "The text is"
+echo $text
+echo ""
+
+echo "List whats in top directory"
+ls -lat 
+echo ""
+
+echo "pwd is"
+pwd 
+echo ""
+
+# METATDATA
+echo $BUILD_ID
+
+# OUTPUT
+# -n don't read any input at all.  Construct froms scratch.
+jq -n "{
+    version:{timestamp:\"$(date +%s)\"}
+}" >&3

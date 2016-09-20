@@ -43,8 +43,7 @@ echo "List whats in top directory"
 ls -lat 
 echo ""
 
-cd $GOPATH
-# Check whats here
+# Check whats in /dist
 echo "List whats in /dist"
 ls -lat dist
 echo ""
