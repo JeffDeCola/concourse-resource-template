@@ -18,7 +18,7 @@ Default is bash script.
 
 ## SOURCE CONFIGURATION
 
-These are just placeholders thatyou can update.
+These are just placeholders that you can update.
 
 * `source1`: Just a placeholder.
 
@@ -50,11 +50,14 @@ _The bash and go scripts are all set to do something._
 
 * `param2`: Just a placeholder.
 
+
+## PIPELINE EXAMPLE
+
 ```yaml
 jobs:
-- name: job-unit-tests
+- name: your-job-name
   plan:
-  - get: hello-go
+  - get: your-repo-names
     trigger: true
     ...
   - put: resource-template
