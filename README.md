@@ -6,7 +6,13 @@
 [![GoDoc](https://godoc.org/github.com/JeffDeCola/resource-template?status.svg)](https://godoc.org/github.com/JeffDeCola/resource-template)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
-`resource-template` _can be used as a tempalte in developing a concourse ci resource type._
+`resource-template` _can be used as a tempalte in developing a concourse ci resource type while using concurse ci to test, build and push it to dockerhub._
+
+## WRITTEN IN BASH SCRIPT AND GO
+
+This resource type is written both in bash script and go.  Default is bash script.
+
+Just change the Dockerfile to copy the proper directory, /asset-go or /asset-bash
 
 ## CHECK
 
