@@ -6,6 +6,9 @@ FROM concourse/buildroot:base
 # This is not needed - but lets do it for fun.
 COPY resource-template /
 
+# Add tree 
+COPY bin/tree /bin
+
 # REQUIRED BY CONCROUSE RESOURCE
 ADD /assets-bash/check /opt/resource/check
 ADD /assets-bash/in /opt/resource/in

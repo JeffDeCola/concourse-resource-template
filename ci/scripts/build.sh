@@ -35,7 +35,8 @@ echo ""
 # Move what you need to $GOPATH/dist
 # BECAUSE the resource type docker-image works in /dist.
 cp -R ./dist $GOPATH/.
-cp -R ./assets $GOPATH/dist/.
+cp -R ./assets-go $GOPATH/dist/.
+cp -R ./assets-bash $GOPATH/dist/.
 
 cd $GOPATH
 # Check whats here
