@@ -18,13 +18,13 @@ echo "List whats in the working directory"
 ls -lat $WORKING_DIR
 echo ""
 
-# We imported tree into the build.  Not needed, but fu to know how to do it.
+# We imported tree into the build.  Not needed, but fun to know how to do it.
 cd $WORKING_DIR
 tree
 
 #  INPUT **************************************************************************************
 # Read stdin (which is json paramter) to file
-# - M = Monochrome output
+# -M = Monochrome output
 # -S = Sort order, 
 # . =  get everything.
 jq -M -S . < /dev/stdin | tee /tmp/input.json    # tee redirects to a file.
@@ -34,9 +34,15 @@ cat /tmp/input.json
 echo ""
 
 # PARSE THE JSON FILE /tmp/input.json 
-text=$(jq -r .params.text < /tmp/input.json)
-echo "The text is"
-echo $text
+param1=$(jq -r .params.param1 < /tmp/input.json)
+param2=$(jq -r .params.param2 < /tmp/input.json)
+param1=$(jq -r .source.source1 < /tmp/input.json)
+param2=$(jq -r .source.source2 < /tmp/input.json)
+echo "params are"
+echo $param1 $param2
+echo ""
+echo "source are"
+echo $source1 $source2
 echo ""
 
 echo "pwd is"
