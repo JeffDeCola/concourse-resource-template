@@ -6,7 +6,8 @@
 [![GoDoc](https://godoc.org/github.com/JeffDeCola/resource-template?status.svg)](https://godoc.org/github.com/JeffDeCola/resource-template)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
-`resource-template` _can be used as a tempalte in developing a concourse ci resource type while using concurse ci to test, build and push it to dockerhub._
+`resource-template` _can be used as a template for developing a concourse ci resource type.
+It is tested, built and pushed to dockerhub using concourse ci._
 
 ## USE EITHER BASH SCRIPT OR GO FOR CHECK, IN & OUT
 
@@ -16,11 +17,11 @@ Change _ci/Dockerfile_ to either ADD _/assets-go_ or _/assets-bash_.
 
 ### USING BASH (default)
 
-The 3 files located in _/assets-bash_.
+The 3 bash script files located in _/assets-bash_.
 
 ### USING GO
 
-All 3 files located in _/assets-go_ run _main.go_ with the second argument being
+Simple bash script are located in _/assets-go_ that run _main.go_ with the second argument being
 _check_, _in_ or _out_ resepctively. Hence only one file (_main.go_) need to be
 maintained, rather then 3.
 
@@ -36,11 +37,21 @@ These are just placeholders that you can update.
 
 ### CHECK
 
-_The bash and go scripts are all set to do something._
+_The bash and go scripts are all ready to add something to them._
 
-### IN
+It will mimic a fetch and output the following versions as a placeholder for IN.
 
-_The bash and go scripts are all set to do something._
+```json
+[
+  { "ref": "123" },
+  { "ref": "3de" },
+  { "ref": "eed" }
+]
+```
+
+### IN (FETCH A RESOURCE)
+
+_The bash and go scripts are all ready to add something to them._
 
 #### Parameters
 
@@ -48,15 +59,23 @@ _The bash and go scripts are all set to do something._
 
 * `param2`: Just a placeholder.
 
-### OUT
+It will mimic a fetch and place a fetched.json file in the working directory that contains the following.
 
-_The bash and go scripts are all set to do something._
+```json
+[
+  { "happy": "days" }
+]
+```
+
+### OUT (UPDATE A RESOURCE)
+
+_The bash and go scripts are all ready to add something to them._
 
 #### Parameters
 
 * `param1`: Just a placeholder.
 
-* `param2`: Just a placeholder.
+* `param2`: Just a placeholder
 
 ## PIPELINE EXAMPLE
 
