@@ -7,7 +7,7 @@ FROM concourse/buildroot:base
 COPY resource-template /
 
 # Add tree 
-COPY bin/tree /bin
+COPY tree /bin
 
 # REQUIRED BY CONCROUSE RESOURCE
 ADD /assets-go/check /opt/resource/check

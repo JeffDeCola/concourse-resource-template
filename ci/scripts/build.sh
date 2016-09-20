@@ -37,6 +37,7 @@ echo ""
 cp -R ./dist $GOPATH/.
 cp -R ./assets-go $GOPATH/dist/.
 cp -R ./assets-bash $GOPATH/dist/.
+cp  /usr/bin/tree $GOPATH/dist/.
 
 cd $GOPATH
 # Check whats here
