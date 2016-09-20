@@ -20,28 +20,29 @@ Default is bash script.
 
 These are just placeholders thatyou can update.
 
-* `placeholder1`: Update to what you need.
+* `source1`: Just a placeholder.
 
-* `placeholder2`: Update to what you need.
+* `source2`: Just a placeholder.
 
 ## BEHAVIOR
-### check
+
+### CHECK
 
 blah blah
 
-### in
+### IN
 
 blah blah
 
 #### Parameters
 
-* `param1': blah blah
+* `param1`: Just a placeholder.
 
-* `param2': blah blah
+* `param2`: Just a placeholder.
 
-### out
+### OUT
 
-blah blah
+The script is all set to do something.
 
 #### Parameters
 
