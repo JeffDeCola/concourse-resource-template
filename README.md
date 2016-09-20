@@ -8,11 +8,13 @@
 
 `resource-template` _can be used as a tempalte in developing a concourse ci resource type while using concurse ci to test, build and push it to dockerhub._
 
-## WRITTEN IN BASH SCRIPT AND GO
+## USE EITHER BASH SCRIPT OR GO FOR CHECK, IN, AND OUT
 
-This resource type is written both in bash script and go.  Default is bash script.
+This resource type can use either bash script or go.
 
-Just change the Dockerfile to copy the proper directory, /asset-go or /asset-bash
+Just change the _ci/Dockerfile_ to ADD either _/assets-go_ or _/assets-bash_.
+
+Default is bash script.
 
 ## CHECK
 
