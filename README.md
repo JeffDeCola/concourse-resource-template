@@ -14,7 +14,15 @@ This resource type can use either bash script or go.
 
 Change _ci/Dockerfile_ to either ADD _/assets-go_ or _/assets-bash_.
 
-Default is bash script.
+### BASH (default)
+
+The 3 files located in /assets-bash.
+
+### GO 
+
+All 3 files located in /assets-go run main.go with the second argument being
+_check_, _in_ or _out_ resepctively.  Only one file (main.go) need to be
+maintained, rather then 3.
 
 ## SOURCE CONFIGURATION
 
@@ -49,7 +57,6 @@ _The bash and go scripts are all set to do something._
 * `param1`: Just a placeholder.
 
 * `param2`: Just a placeholder.
-
 
 ## PIPELINE EXAMPLE
 
