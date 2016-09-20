@@ -30,12 +30,14 @@ func main() {
 	var (
 		input   inputJSON
 		decoder = json.NewDecoder(os.Stdin)
-		encoder = json.NewEncoder(os.Stdout)
 	)
 
 	if err := decoder.Decode(&input); err != nil {
 		panic("Failed to decode stdin")
 	}
+
+	fmt.Fprintln(os.Stderr, input.Params["text"])
+	fmt.Fprintln(os.Stderr, os.Args[2])
 
 	switch os.Args[1] {
 	case "check":
@@ -44,11 +46,9 @@ func main() {
 		//TODO: do in
 	case "out":
 
-		fmt.Fprintln(os.Stderr, input.Params["text"])
-		fmt.Fprintln(os.Stderr, os.Args[2])
-		encoder.Encode(ioOut{
-			Version:  version{Ref: "12"},
-			Metadata: []metadata{{Name: "text", Value: input.Params["text"]}},
+		json.NewEncoder(os.Stdout).Encode(ioOut{
+			Version: version{Ref: "12"},
+			// Metadata: []metadata{{Name: "text", Value: input.Params["text"]}},
 		})
 
 	}
