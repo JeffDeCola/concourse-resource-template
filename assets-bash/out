@@ -48,23 +48,22 @@ ls -lat
 echo ""
 
 # SOME METATDATA YOU CAN USE
-#echo "BUILD_ID = $BUILD_ID"
-#echo "BUILD_NAME = $BUILD_NAME"
-#echo "BUILD_JOB_NAME = $BUILD_JOB_NAME"
-#echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
-#echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
+echo "BUILD_ID = $BUILD_ID"
+echo "BUILD_NAME = $BUILD_NAME"
+echo "BUILD_JOB_NAME = $BUILD_JOB_NAME"
+echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
+echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
 
 # DO SOMETHING **************************************************************************************
 # DO WHATEVER YOU NEED TO DO
 #
-monkey="henry-the-monkey"
-
+monkeyname="henry"
 
 # OUTPUT **************************************************************************************
 json_output='{
     "version":{ "timestamp": "'$(date +%s)'" },
     "metadata": [
-        { "name": "commit", "value": "'$monkey'" },
+        { "name": "nameofmonkey", "value": "'$monkeyname'" },
         { "name": "author", "value": "Jeff DeCola" }
     ]
 }'
@@ -72,4 +71,4 @@ json_output='{
 echo "jason output is $json_output"
 
 # -n don't read any input at all.  Construct froms scratch.
-jq -n "$json_output" < /dev/stdin >&3
+jq -n "$json_output" >&3

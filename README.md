@@ -12,33 +12,42 @@
 
 This resource type can use either bash script or go.
 
-Just change the _ci/Dockerfile_ to ADD either _/assets-go_ or _/assets-bash_.
+Change _ci/Dockerfile_ to either ADD _/assets-go_ or _/assets-bash_.
 
 Default is bash script.
 
-## CHECK
+## SOURCE CONFIGURATION
+
+These are just placeholders thatyou can update.
+
+* `placeholder1`: Update to what you need.
+
+* `placeholder2`: Update to what you need.
+
+## BEHAVIOR
+### check
 
 blah blah
 
-## IN
+### in
 
 blah blah
 
-### Parameters
+#### Parameters
 
 * `param1': blah blah
 
 * `param2': blah blah
 
-## OUT
+### out
 
 blah blah
 
-### Parameters
+#### Parameters
 
-* `param1': blah blah
+* `param1`: Just a placeholder.
 
-* `param2': blah blah
+* `param2`: Just a placeholder.
 
 ## BUILT USING CONCOURSE CI
 
