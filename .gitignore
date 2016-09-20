@@ -24,3 +24,5 @@ _testmain.go
 *.prof
 .credentials.yml
 coverage.out
+/Dockerfile
+/resource-template
