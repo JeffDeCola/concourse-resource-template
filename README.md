@@ -8,20 +8,20 @@
 
 `resource-template` _can be used as a tempalte in developing a concourse ci resource type while using concurse ci to test, build and push it to dockerhub._
 
-## USE EITHER BASH SCRIPT OR GO FOR CHECK, IN, AND OUT
+## USE EITHER BASH SCRIPT OR GO FOR CHECK, IN & OUT
 
 This resource type can use either bash script or go.
 
 Change _ci/Dockerfile_ to either ADD _/assets-go_ or _/assets-bash_.
 
-### BASH (default)
+### USING BASH (default)
 
-The 3 files located in /assets-bash.
+The 3 files located in _/assets-bash_.
 
-### GO 
+### USING GO
 
-All 3 files located in /assets-go run main.go with the second argument being
-_check_, _in_ or _out_ resepctively.  Only one file (main.go) need to be
+All 3 files located in _/assets-go_ run _main.go_ with the second argument being
+_check_, _in_ or _out_ resepctively. Hence only one file (_main.go_) need to be
 maintained, rather then 3.
 
 ## SOURCE CONFIGURATION
@@ -87,7 +87,7 @@ resources:
     source1: foo2
 ```
 
-## BUILT USING CONCOURSE CI
+## TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE CI
 
 To automate the creation of the `resource-template` docker image, a concourse ci pipeline
 will unit test, build and push the docker image to dockerhub.
