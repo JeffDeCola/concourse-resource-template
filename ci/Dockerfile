@@ -3,7 +3,7 @@
 FROM concourse/buildroot:base
 
 # Put the binary into the container
-# This is not needed - but lets do it for fun.
+# This is need with go only
 COPY resource-template /
 
 # Add tree - Not needed but illustrates how to add a command to build
