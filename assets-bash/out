@@ -1,4 +1,5 @@
 #!/bin/bash
+# resource-template out
 
 # NOTE: YOU CAN REMOVE ALL THESE ECHO'S.  I FIND THEM HELPFUL
 
@@ -9,6 +10,9 @@ set -o pipefail     # Fail on a pipline like cmd1 | cmd2 | cmd3, rather then wai
 
 exec 3>&1           # Make stdout available as fd 3 for the result
 exec 1>&2           # Redirect all output to stderr for logging
+
+echo "OUT (UPDATE THE RESOURCE)"
+echo ""
 
 # Get the working directory from arg $1
 WORKING_DIR=$1
@@ -33,15 +37,15 @@ cat /tmp/input.json
 echo ""
 
 # PARSE THE JSON FILE /tmp/input.json 
-param1=$(jq -r .params.param1 < /tmp/input.json)
-param2=$(jq -r .params.param2 < /tmp/input.json)
 source1=$(jq -r .source.source1 < /tmp/input.json)
 source2=$(jq -r .source.source2 < /tmp/input.json)
-echo "params are"
-echo $param1 $param2
-echo ""
+param1=$(jq -r .params.param1 < /tmp/input.json)
+param2=$(jq -r .params.param2 < /tmp/input.json)
 echo "source are"
 echo $source1 $source2
+echo ""
+echo "params are"
+echo $param1 $param2
 echo ""
 
 echo "pwd is"
@@ -52,21 +56,15 @@ echo "List whats in top directory"
 ls -lat 
 echo ""
 
-# SOME METATDATA YOU CAN USE
-echo "BUILD_ID = $BUILD_ID"
-echo "BUILD_NAME = $BUILD_NAME"
-echo "BUILD_JOB_NAME = $BUILD_JOB_NAME"
-echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
-echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
+# OUT (UPDATE THE RESOURCE) *************************************************************************
+# Mimic an out.
 
-# DO SOMETHING **************************************************************************************
-# DO WHATEVER YOU NEED TO DO
-#
-monkeyname="henry"
+monkeyname="Henry"
+ref="123"
 
 # OUTPUT **************************************************************************************
 json_output='{
-    "version":{ "timestamp": "'$(date +%s)'" },
+    "version":{ "ref": "'$ref'" },
     "metadata": [
         { "name": "nameofmonkey", "value": "'$monkeyname'" },
         { "name": "author", "value": "Jeff DeCola" }

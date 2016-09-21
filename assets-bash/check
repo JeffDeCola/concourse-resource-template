@@ -1,7 +1,66 @@
 #!/bin/bash
+# resource-template check
 
-echo "NOTHING"
+# NOTE: YOU CAN REMOVE ALL THESE ECHO'S.  I FIND THEM HELPFUL
+
+set -e              # Willexit immediate if command exits with non-zero status
+set -u              # Will print message if variable not set,
+#set -x             # Prints the shell commands +
+set -o pipefail     # Fail on a pipline like cmd1 | cmd2 | cmd3, rather then wait
+
+exec 3>&1           # Make stdout available as fd 3 for the result
+exec 1>&2           # Redirect all output to stderr for logging
+
+echo "CHECK (THE RESOURCE VERSION(s))"
+echo ""
+
+#  INPUT **************************************************************************************
+# Read stdin (which is json paramter) to file
+# -M = Monochrome output
+# -S = Sort order, 
+# . =  get everything.
+jq -M -S . < /dev/stdin | tee /tmp/input.json    # tee redirects to a file.
+
+echo "json stdin is:"
+cat /tmp/input.json
+echo ""
+
+# PARSE THE JSON FILE /tmp/input.json 
+source1=$(jq -r .source.source1 < /tmp/input.json)
+source2=$(jq -r .source.source2 < /tmp/input.json)
+ref=$(jq -r .version.ref < /tmp/input.json)
+echo "source are"
+echo $source1 $source2
+echo ""
+echo "ref is"
+echo $ref
+echo ""
+
+echo "pwd is"
+pwd 
+echo ""
 
 echo "List whats in top directory"
 ls -lat 
 echo ""
+
+# CHECK (THE RESOURCE VERSION(s)) *******************************************************************
+# Mimic a fetch and output the following versions for IN.
+
+ver1="123"
+ver2="3de"
+ver3="456"
+ver4="786"
+
+# OUTPUT **************************************************************************************
+json_output='[
+    { "ref": "'$ver1'" },
+    { "ref": "'$ver2'" },
+    { "ref": "'$ver3'" },
+    { "ref": "'$ver4'" }
+]'
+
+echo "jason output is $json_output"
+
+# -n don't read any input at all.  Construct froms scratch.
+jq -n "$json_output" >&3
