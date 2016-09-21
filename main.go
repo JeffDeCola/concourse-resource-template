@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 )
 
@@ -27,6 +28,7 @@ type (
 )
 
 func main() {
+
 	var (
 		input   inputJSON
 		decoder = json.NewDecoder(os.Stdin)
@@ -36,14 +38,53 @@ func main() {
 		panic("Failed to decode stdin")
 	}
 
-	fmt.Fprintln(os.Stderr, input.Params["text"])
-	fmt.Fprintln(os.Stderr, os.Args[2])
-
 	switch os.Args[1] {
 	case "check":
-		//TODO: do check
+		fmt.Fprintln(os.Stderr, "CHECK (THE RESOURCE VERSION(s))")
+		fmt.Fprintln(os.Stderr, "")
 	case "in":
-		//TODO: do in
+		fmt.Fprintln(os.Stderr, "IN (FETCH THE RESOURCE)")
+		fmt.Fprintln(os.Stderr, "")
+	case "out":
+		fmt.Fprintln(os.Stderr, "OUT (UPDATE THE RESOURCE)")
+		fmt.Fprintln(os.Stderr, "")
+	}
+
+	// Get the working directory from arg $2
+	var workingdir = os.Args[2]
+	fmt.Fprintln(os.Stderr, "WORKING_DIR = ", workingdir)
+	fmt.Fprintln(os.Stderr, "List whats in the working directory")
+	//ls -lat $WORKING_DIR
+	files, _ := ioutil.ReadDir("./")
+	for _, f := range files {
+		fmt.Fprintln(os.Stderr, f.Name())
+	}
+	fmt.Fprintln(os.Stderr, "")
+
+	// List whats in the input stdin json
+	b, _ := json.MarshalIndent(input, "", "  ")
+	fmt.Fprintln(os.Stderr, string(b))
+	fmt.Fprintln(os.Stderr, "")
+
+
+
+
+	switch os.Args[1] {
+
+	// CHECK (THE RESOURCE VERSION(s)) *******************************************************************
+	// Mimic a fetch and output the following versions for IN.
+	case "check":
+
+		//TODO: do CHECK
+
+	// IN (FETCH THE RESOURCE) *************************************************************************
+	// Mimic a fetch and place a fetched.json file in the working directory that contains the following.
+	case "in":
+
+		//TODO: do IN
+
+	// OUT (UPDATE THE RESOURCE) *************************************************************************
+	// Mimic an out.
 	case "out":
 
 		json.NewEncoder(os.Stdout).Encode(ioOut{
