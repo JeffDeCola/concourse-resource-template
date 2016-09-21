@@ -7,9 +7,10 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
 `resource-template` _can be used as a template for developing a concourse ci resource type.
+Lots of comments and extra code for explanation.
 It is tested, built and pushed to dockerhub using concourse ci._
 
-## USE EITHER BASH SCRIPT OR GO FOR CHECK, IN & OUT
+## USE EITHER BASH SCRIPT OR GO
 
 This resource type can use either bash script or go.
 
@@ -39,15 +40,36 @@ These are just placeholders that you can update.
 
 _The bash and go scripts are all ready to add something to them._
 
-It will mimic a fetch and output the following versions for IN.
+#### stdin
+
+```json
+{
+  "source": {
+    "source1": "sourcefoo1",
+    "source2": "sourcefoo2"
+  },
+  "version": {
+    "ref": "123 ",
+  }
+}
+
+where 123 is the current version.
+
+```
+
+#### stdout
 
 ```json
 [
   { "ref": "123" },
   { "ref": "3de" },
-  { "ref": "eed" }
+  { "ref": "456" }
 ]
 ```
+
+where 456 is the latest version that will be used.
+
+The last number 456 will become the current ref version that will be used by IN.
 
 ### IN (fetch a resource)
 
@@ -59,12 +81,42 @@ _The bash and go scripts are all ready to add something to them._
 
 * `param2`: Just a placeholder.
 
-It will mimic a fetch and place a `fetched.json` file in the working directory that contains the following.
+#### stdin
 
 ```json
-[
-  { "happy": "days" }
-]
+{
+  "source": {
+    "source1": "sourcefoo1",
+    "source2": "sourcefoo2"
+  },
+  "params": {
+    "param1": "Hello Clif",
+    "param2": "Nice to meet you"
+  },
+  "version": {
+    "ref": "456",
+  }
+```
+
+#### stdout
+
+```json
+{
+  "version":{ "ref": "456" },
+  "metadata": [
+    { "name": "nameofmonkey", "value": "Larry" },
+    { "name": "author","value": "Jeff DeCola" }
+  ]
+}
+```
+
+It will mimic a fetch and place a `fetched.json` file in the working directory that contains:
+
+```json
+{
+  "version": { "ref": "'$ref'" },
+  "metadata": { "happy": "days" }
+}
 ```
 
 ### OUT (update a resouce)
@@ -77,7 +129,36 @@ _The bash and go scripts are all ready to add something to them._
 
 * `param2`: Just a placeholder
 
-## PIPELINE EXAMPLE
+#### stdin
+
+```json
+{
+  "params": {
+    "param1": "Hello Jeff",
+    "param2": "How are you?"
+  },
+  "source": {
+    "source1": "sourcefoo1",
+    "source2": "sourcefoo2"
+  }
+}
+```
+
+#### stdout
+
+```json
+{
+  "version":{ "ref": "123" },
+  "metadata": [
+    { "name": "nameofmonkey","value": "Henry" },
+    { "name": "author","value": "Jeff DeCola" }
+  ]
+}
+```
+
+where 123 is the version you wanted to update.
+
+## PIPELINE EXAMPLE USING PUT
 
 ```yaml
 jobs:
@@ -105,6 +186,8 @@ resources:
     source1: foo1
     source1: foo2
 ```
+
+GET would look similiar.
 
 ## TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE CI
 
