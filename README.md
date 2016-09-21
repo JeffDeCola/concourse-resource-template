@@ -21,9 +21,9 @@ The 3 bash script files located in _/assets-bash_.
 
 ### USING GO
 
-Simple bash script are located in _/assets-go_ that run _main.go_ with the second argument being
-_check_, _in_ or _out_ resepctively. Hence only one file (_main.go_) need to be
-maintained, rather then 3.
+The 3 bash scripts are located in _/assets-go_ that run _main.go_ with the second argument being
+_check_, _in_ or _out_ resepctively. Hence only one file _main.go_ need to be
+maintained, rather than 3.
 
 ## SOURCE CONFIGURATION
 
@@ -35,11 +35,11 @@ These are just placeholders that you can update.
 
 ## BEHAVIOR
 
-### CHECK
+### CHECK (a resource version(s))
 
 _The bash and go scripts are all ready to add something to them._
 
-It will mimic a fetch and output the following versions as a placeholder for IN.
+It will mimic a fetch and output the following versions for IN.
 
 ```json
 [
@@ -49,7 +49,7 @@ It will mimic a fetch and output the following versions as a placeholder for IN.
 ]
 ```
 
-### IN (FETCH A RESOURCE)
+### IN (fetch a resource)
 
 _The bash and go scripts are all ready to add something to them._
 
@@ -59,7 +59,7 @@ _The bash and go scripts are all ready to add something to them._
 
 * `param2`: Just a placeholder.
 
-It will mimic a fetch and place a fetched.json file in the working directory that contains the following.
+It will mimic a fetch and place a `fetched.json` file in the working directory that contains the following.
 
 ```json
 [
@@ -67,7 +67,7 @@ It will mimic a fetch and place a fetched.json file in the working directory tha
 ]
 ```
 
-### OUT (UPDATE A RESOURCE)
+### OUT (update a resouce)
 
 _The bash and go scripts are all ready to add something to them._
 
