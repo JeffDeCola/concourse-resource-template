@@ -217,6 +217,7 @@ func main() {
 
 	// List whats in the input stdin .json
 	// MashalIndent makes it print nicely
+	fmt.Fprintln(os.Stderr, "This is the input stdin .json format:")
 	b, _ := json.MarshalIndent(input, "", "  ")
 	fmt.Fprintln(os.Stderr, string(b))
 	fmt.Fprintln(os.Stderr, "")
