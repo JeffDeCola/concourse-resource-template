@@ -56,6 +56,14 @@ echo "List whats in top directory"
 ls -lat 
 echo ""
 
+# SOME METATDATA YOU CAN USE
+echo "BUILD_ID = $BUILD_ID"
+echo "BUILD_NAME = $BUILD_NAME"
+echo "BUILD_JOB_NAME = $BUILD_JOB_NAME"
+echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
+echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
+echo " "
+
 # OUT (UPDATE THE RESOURCE) *************************************************************************
 # Mimic an out.
 
