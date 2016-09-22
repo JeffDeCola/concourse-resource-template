@@ -87,6 +87,14 @@ func in(input inputJSON) {
 	fmt.Fprintln(os.Stderr, ref)
 	fmt.Fprintln(os.Stderr, "")
 
+	// SOME METATDATA YOU CAN USE
+	fmt.Fprintln(os.Stderr, "BUILD_ID = ", os.Getenv("BUILD_ID"))
+	fmt.Fprintln(os.Stderr, "BUILD_NAME = ", os.Getenv("BUILD_NAME"))
+	fmt.Fprintln(os.Stderr, "BUILD_JOB_NAME = ", os.Getenv("BUILD_JOB_NAME"))
+	fmt.Fprintln(os.Stderr, "BUILD_PIPELINE_NAME = ", os.Getenv("BUILD_PIPELINE_NAME"))
+	fmt.Fprintln(os.Stderr, "ATC_EXTERNAL_URL = ", os.Getenv("ATC_EXTERNAL_URL"))
+	fmt.Fprintln(os.Stderr, "")
+
 	// IN (FETCH THE RESOURCE) *************************************************************************
 	// Mimic a fetch and place a fetched.json file in the working directory that contains the following.
 
@@ -153,6 +161,14 @@ func out(input inputJSON) {
 	fmt.Fprintln(os.Stderr, "")
 	fmt.Fprintln(os.Stderr, "source are")
 	fmt.Fprintln(os.Stderr, source1, source2)
+	fmt.Fprintln(os.Stderr, "")
+
+	// SOME METATDATA YOU CAN USE
+	fmt.Fprintln(os.Stderr, "BUILD_ID = ", os.Getenv("BUILD_ID"))
+	fmt.Fprintln(os.Stderr, "BUILD_NAME = ", os.Getenv("BUILD_NAME"))
+	fmt.Fprintln(os.Stderr, "BUILD_JOB_NAME = ", os.Getenv("BUILD_JOB_NAME"))
+	fmt.Fprintln(os.Stderr, "BUILD_PIPELINE_NAME = ", os.Getenv("BUILD_PIPELINE_NAME"))
+	fmt.Fprintln(os.Stderr, "ATC_EXTERNAL_URL = ", os.Getenv("ATC_EXTERNAL_URL"))
 	fmt.Fprintln(os.Stderr, "")
 
 	// OUT (UPDATE THE RESOURCE) *************************************************************************
