@@ -71,7 +71,7 @@ json_output='{
     ]
 }'
 
-echo "jason output is $json_output"
+echo ".json output is $json_output"
 
 # -n don't read any input at all.  Construct froms scratch.
 jq -n "$json_output" >&3
