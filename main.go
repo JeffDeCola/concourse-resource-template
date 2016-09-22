@@ -204,16 +204,18 @@ func main() {
 		fmt.Fprintln(os.Stderr, "")
 	}
 
-	// Get the working directory from arg $2
-	var workingdir = os.Args[2]
-	fmt.Fprintln(os.Stderr, "WORKING_DIR = ", workingdir)
-	fmt.Fprintln(os.Stderr, "List whats in the working directory")
-	//ls -lat $WORKING_DIR
-	files, _ := ioutil.ReadDir("./")
-	for _, f := range files {
-		fmt.Fprintln(os.Stderr, f.Name())
+	// Get the working directory from arg $2 (Only for IN and OUT)
+	if os.Args[1] != "check" {
+		var workingdir = os.Args[2]
+		fmt.Fprintln(os.Stderr, "WORKING_DIR = ", workingdir)
+		fmt.Fprintln(os.Stderr, "List whats in the working directory")
+		//ls -lat $WORKING_DIR
+		files, _ := ioutil.ReadDir("./")
+		for _, f := range files {
+			fmt.Fprintln(os.Stderr, f.Name())
+		}
+		fmt.Fprintln(os.Stderr, "")
 	}
-	fmt.Fprintln(os.Stderr, "")
 
 	// List whats in the input stdin .json
 	// MashalIndent makes it print nicely
