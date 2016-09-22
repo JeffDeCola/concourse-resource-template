@@ -101,6 +101,7 @@ func in(input inputJSON) {
 	fmt.Fprintf(filewrite, jsonfile)
 
 	//ls -lat $WORKING_DIR
+	fmt.Fprintln(os.Stderr, "List whats in the directory:")
 	files, _ := ioutil.ReadDir("./")
 	for _, f := range files {
 		fmt.Fprintln(os.Stderr, f.Name())
@@ -115,7 +116,7 @@ func in(input inputJSON) {
 	}
 	defer file.Close()
 	bb, err := ioutil.ReadAll(file)
-	fmt.Print(string(bb))
+	fmt.Fprintln(os.Stderr, string(bb))
 	fmt.Fprintln(os.Stderr, "")
 	fmt.Fprintln(os.Stderr, "")
 
