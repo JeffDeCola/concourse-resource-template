@@ -24,11 +24,11 @@ The 3 bash script files located in _/assets-bash_.
 
 The 3 bash scripts are located in _/assets-go_ that run _main.go_ with the second argument being
 _check_, _in_ or _out_ resepctively. Hence only one file _main.go_ need to be
-maintained, rather than 3.
+maintained, rather than three seperate files.
 
 ## SOURCE CONFIGURATION
 
-These are just placeholders that you can update.
+These are just placeholders that you can update where your source is.
 
 * `source1`: Just a placeholder.
 
@@ -38,7 +38,7 @@ These are just placeholders that you can update.
 
 ### CHECK (a resource version(s))
 
-_The bash and go scripts are all ready to add something to them._
+_CHECK will mimic getting the list of versions from a resource._
 
 #### stdin
 
@@ -54,7 +54,7 @@ _The bash and go scripts are all ready to add something to them._
 }
 ```
 
-where 123 is the current version.
+123 is the current version.
 
 #### stdout
 
@@ -66,13 +66,13 @@ where 123 is the current version.
 ]
 ```
 
-where 456 is the latest version that will be used.
+456 is the latest version that will be used.
 
 The last number 456 will become the current ref version that will be used by IN.
 
 ### IN (fetch a resource)
 
-_The bash and go scripts are all ready to add something to them._
+_IN will mimic fetching a resource and placing a file in the working directory._
 
 #### Parameters
 
@@ -109,18 +109,13 @@ _The bash and go scripts are all ready to add something to them._
 }
 ```
 
-It will mimic a fetch and place a `fetched.json` file in the working directory that contains:
+#### file fetched (fetch.json)
 
-```json
-{
-  "version": { "ref": "'$ref'" },
-  "metadata": { "happy": "days" }
-}
-```
+The IN will mimic a fetch and place a fake file `fetched.json` file in the working directory:
 
 ### OUT (update a resouce)
 
-_The bash and go scripts are all ready to add something to them._
+_OUT will mimic updating a resource._
 
 #### Parameters
 
