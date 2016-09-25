@@ -20,7 +20,7 @@ func dumpinput(verb string, input actions.InputJSON, logger *log.Logger) {
 		logger.Print("WORKING_DIR = ", workingdir)
 		logger.Print("List whats in the working directory:")
 		//ls -lat $WORKING_DIR
-		files, _ := ioutil.ReadDir("./")
+		files, _ := ioutil.ReadDir(workingdir)
 		for _, f := range files {
 			logger.Print(f.Name())
 		}

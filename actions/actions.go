@@ -57,7 +57,7 @@ func Check(input InputJSON, logger *log.Logger) (checkOutputJSON, error) {
 	}
 	var ref = input.Version.Ref
 	logger.Print("source are")
-	logger.Print(source1, source2)
+	logger.Print(source1, ", ", source2)
 	logger.Print("ref is")
 	logger.Print(ref)
 
@@ -95,9 +95,9 @@ func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 	//}
 	var ref = input.Version.Ref
 	logger.Print("source are")
-	logger.Print(source1, source2)
+	logger.Print(source1, ", ", source2)
 	logger.Print("params are")
-	logger.Print(param1, param2)
+	logger.Print(param1, ", ", param2)
 	logger.Print("ref is")
 	logger.Print(ref)
 
@@ -175,9 +175,9 @@ func Out(input InputJSON, logger *log.Logger) (outOutputJSON, error) {
 	}
 	var ref = input.Version.Ref
 	logger.Print("source are")
-	logger.Print(source1, source2)
+	logger.Print(source1, ", ", source2)
 	logger.Print("params are")
-	logger.Print(param1, param2)
+	logger.Print(param1, ", ", param2)
 	logger.Print("ref is")
 	logger.Print(ref)
 
