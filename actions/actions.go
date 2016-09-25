@@ -38,6 +38,7 @@ func getversions() []string {
 		"123",
 		"3de",
 		"456",
+		"777",
 	}
 
 }
@@ -191,7 +192,7 @@ func Out(input InputJSON, logger *log.Logger) (outOutputJSON, error) {
 	// Mimic an out.
 
 	var monkeyname = "Henry"
-	ref = "456" // This is the resulting version of the resource it is updating
+	ref = "777" // This is the resulting version of the resource it is updating
 
 	// OUTPUT **************************************************************************************
 	output := outOutputJSON{
