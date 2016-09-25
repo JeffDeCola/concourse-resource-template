@@ -1,3 +1,5 @@
+// resource-template actions.go
+
 package actions
 
 import (
@@ -36,12 +38,11 @@ func getversions() []string {
 		"123",
 		"3de",
 		"456",
-		"336",
 	}
 
 }
 
-// Check will return the versions available.
+// Check will return the NEW versions of a resource.
 func Check(input InputJSON, logger *log.Logger) (checkOutputJSON, error) {
 
 	// PARSE THE JSON FILE /tmp/input.json
@@ -71,7 +72,7 @@ func Check(input InputJSON, logger *log.Logger) (checkOutputJSON, error) {
 
 }
 
-// IN will fetch something and place in the working directory.
+// IN will fetch a giving resource and place it in the working directory.
 func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 
 	// PARSE THE JSON FILE /tmp/input.json
@@ -151,7 +152,7 @@ func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 
 }
 
-// Out ...
+// Out will update the resource.
 func Out(input InputJSON, logger *log.Logger) (outOutputJSON, error) {
 
 	// PARSE THE JSON FILE /tmp/input.json
@@ -190,7 +191,7 @@ func Out(input InputJSON, logger *log.Logger) (outOutputJSON, error) {
 	// Mimic an out.
 
 	var monkeyname = "Henry"
-	ref = "123"
+	ref = "456" // This is the resource it is updating
 
 	// OUTPUT **************************************************************************************
 	output := outOutputJSON{
