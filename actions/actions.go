@@ -88,7 +88,7 @@ func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 	//if !ok {
 	//	return inOutputJSON{}, errors.New("param1 not set")
 	//}
-	//param2, ok := input.Params["param2"]
+	param2, ok := input.Params["param2"]
 	//if !ok {
 	//	return inOutputJSON{}, errors.New("param2 not set")
 	//}
