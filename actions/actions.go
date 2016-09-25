@@ -85,13 +85,13 @@ func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 		return inOutputJSON{}, errors.New("source2 not set")
 	}
 	param1, ok := input.Params["param1"]
-	if !ok {
-		return inOutputJSON{}, errors.New("param1 not set")
-	}
-	param2, ok := input.Params["param2"]
-	if !ok {
-		return inOutputJSON{}, errors.New("param2 not set")
-	}
+	//if !ok {
+	//	return inOutputJSON{}, errors.New("param1 not set")
+	//}
+	//param2, ok := input.Params["param2"]
+	//if !ok {
+	//	return inOutputJSON{}, errors.New("param2 not set")
+	//}
 	var ref = input.Version.Ref
 	logger.Print("source are")
 	logger.Print(source1, source2)
@@ -191,7 +191,7 @@ func Out(input InputJSON, logger *log.Logger) (outOutputJSON, error) {
 	// Mimic an out.
 
 	var monkeyname = "Henry"
-	ref = "456" // This is the resource it is updating
+	ref = "456" // This is the resulting version of the resource it is updating
 
 	// OUTPUT **************************************************************************************
 	output := outOutputJSON{
