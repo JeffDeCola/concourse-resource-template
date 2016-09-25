@@ -7,7 +7,6 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
 `resource-template` _can be used as a template for developing a concourse ci resource type.
-Lots of comments, placeholders and extra code to make your own.
 It is tested, built and pushed to dockerhub using concourse ci._
 
 ## USE EITHER BASH SCRIPT OR GO
