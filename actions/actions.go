@@ -47,6 +47,14 @@ func getversions() []string {
 func Check(input InputJSON, logger *log.Logger) (checkOutputJSON, error) {
 
 	// PARSE THE JSON FILE /tmp/input.json
+	param1, ok := input.Params["param1"]
+	//if !ok {
+	//	return inOutputJSON{}, errors.New("param1 not set")
+	//}
+	param2, ok := input.Params["param2"]
+	//if !ok {
+	//	return inOutputJSON{}, errors.New("param2 not set")
+	//}
 	source1, ok := input.Source["source1"]
 	if !ok {
 		return checkOutputJSON{}, errors.New("Source1 not set")
@@ -56,6 +64,8 @@ func Check(input InputJSON, logger *log.Logger) (checkOutputJSON, error) {
 		return checkOutputJSON{}, errors.New("Source2 not set")
 	}
 	var ref = input.Version.Ref
+	logger.Print("params are")
+	logger.Print(param1, ", ", param2)
 	logger.Print("source are")
 	logger.Print(source1, ", ", source2)
 	logger.Print("ref is")
@@ -77,14 +87,6 @@ func Check(input InputJSON, logger *log.Logger) (checkOutputJSON, error) {
 func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 
 	// PARSE THE JSON FILE /tmp/input.json
-	source1, ok := input.Source["source1"]
-	if !ok {
-		return inOutputJSON{}, errors.New("source1 not set")
-	}
-	source2, ok := input.Source["source2"]
-	if !ok {
-		return inOutputJSON{}, errors.New("source2 not set")
-	}
 	param1, ok := input.Params["param1"]
 	//if !ok {
 	//	return inOutputJSON{}, errors.New("param1 not set")
@@ -93,11 +95,19 @@ func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 	//if !ok {
 	//	return inOutputJSON{}, errors.New("param2 not set")
 	//}
+	source1, ok := input.Source["source1"]
+	if !ok {
+		return inOutputJSON{}, errors.New("source1 not set")
+	}
+	source2, ok := input.Source["source2"]
+	if !ok {
+		return inOutputJSON{}, errors.New("source2 not set")
+	}
 	var ref = input.Version.Ref
-	logger.Print("source are")
-	logger.Print(source1, ", ", source2)
 	logger.Print("params are")
 	logger.Print(param1, ", ", param2)
+	logger.Print("source are")
+	logger.Print(source1, ", ", source2)
 	logger.Print("ref is")
 	logger.Print(ref)
 
@@ -157,14 +167,6 @@ func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 func Out(input InputJSON, logger *log.Logger) (outOutputJSON, error) {
 
 	// PARSE THE JSON FILE /tmp/input.json
-	source1, ok := input.Source["source1"]
-	if !ok {
-		return outOutputJSON{}, errors.New("source1 not set")
-	}
-	source2, ok := input.Source["source2"]
-	if !ok {
-		return outOutputJSON{}, errors.New("source2 not set")
-	}
 	param1, ok := input.Params["param1"]
 	if !ok {
 		return outOutputJSON{}, errors.New("param1 not set")
@@ -173,11 +175,20 @@ func Out(input InputJSON, logger *log.Logger) (outOutputJSON, error) {
 	if !ok {
 		return outOutputJSON{}, errors.New("param2 not set")
 	}
+	source1, ok := input.Source["source1"]
+	if !ok {
+		return outOutputJSON{}, errors.New("source1 not set")
+	}
+	source2, ok := input.Source["source2"]
+	if !ok {
+		return outOutputJSON{}, errors.New("source2 not set")
+	}
+
 	var ref = input.Version.Ref
-	logger.Print("source are")
-	logger.Print(source1, ", ", source2)
 	logger.Print("params are")
 	logger.Print(param1, ", ", param2)
+	logger.Print("source are")
+	logger.Print(source1, ", ", source2)
 	logger.Print("ref is")
 	logger.Print(ref)
 
