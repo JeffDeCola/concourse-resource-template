@@ -83,13 +83,13 @@ _IN will mimic fetching a resource and placing a file in the working directory._
 
 ```json
 {
-  "source": {
-    "source1": "sourcefoo1",
-    "source2": "sourcefoo2"
-  },
   "params": {
     "param1": "Hello Clif",
     "param2": "Nice to meet you"
+  },
+  "source": {
+    "source1": "sourcefoo1",
+    "source2": "sourcefoo2"
   },
   "version": {
     "ref": "456",
@@ -133,6 +133,9 @@ _OUT will mimic updating a resource._
   "source": {
     "source1": "sourcefoo1",
     "source2": "sourcefoo2"
+  },
+  "version": {
+    "ref": ""
   }
 }
 ```
