@@ -6,8 +6,9 @@
 [![GoDoc](https://godoc.org/github.com/JeffDeCola/resource-template?status.svg)](https://godoc.org/github.com/JeffDeCola/resource-template)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
-`resource-template` _can be used as a template for developing a concourse ci resource type.
-It is tested, built and pushed to dockerhub using concourse ci._
+`resource-template` _can be used as a template for developing a
+concourse ci resource type. It is tested, built and pushed to
+dockerhub using concourse ci._
 
 ## USE EITHER BASH SCRIPT OR GO
 
@@ -21,9 +22,10 @@ The 3 bash script files located in _/assets-bash_.
 
 ### USING GO
 
-The 3 bash scripts are located in _/assets-go_ that run _main.go_ with the second argument being
-_check_, _in_ or _out_ resepctively. Hence only one file _main.go_ need to be
-maintained, rather than three seperate files.
+The 3 bash scripts are located in _/assets-go_ that run _main.go_ with
+the second argument being _check_, _in_ or _out_ resepctively.
+Hence only one file _main.go_ need to be maintained, rather than
+three seperate files.
 
 ## SOURCE CONFIGURATION
 
@@ -39,7 +41,7 @@ These are just placeholders that you can update where your source is.
 
 _CHECK will mimic getting the list of versions from a resource._
 
-#### stdin
+#### CHECK stdin
 
 ```json
 {
@@ -55,7 +57,7 @@ _CHECK will mimic getting the list of versions from a resource._
 
 123 is the current version.
 
-#### stdout
+#### CHECK stdout
 
 ```json
 [
@@ -73,13 +75,13 @@ The last number 456 will become the current ref version that will be used by IN.
 
 _IN will mimic fetching a resource and placing a file in the working directory._
 
-#### Parameters
+#### IN Parameters
 
 * `param1`: Just a placeholder.
 
 * `param2`: Just a placeholder.
 
-#### stdin
+#### IN stdin
 
 ```json
 {
@@ -96,7 +98,7 @@ _IN will mimic fetching a resource and placing a file in the working directory._
   }
 ```
 
-#### stdout
+#### IN stdout
 
 ```json
 {
@@ -110,19 +112,20 @@ _IN will mimic fetching a resource and placing a file in the working directory._
 
 #### file fetched (fetch.json)
 
-The IN will mimic a fetch and place a fake file `fetched.json` file in the working directory:
+The IN will mimic a fetch and place a fake file `fetched.json` file
+in the working directory:
 
 ### OUT (update a resouce)
 
 _OUT will mimic updating a resource._
 
-#### Parameters
+#### OUT Parameters
 
 * `param1`: Just a placeholder.
 
 * `param2`: Just a placeholder
 
-#### stdin
+#### OUT stdin
 
 ```json
 {
@@ -140,7 +143,7 @@ _OUT will mimic updating a resource._
 }
 ```
 
-#### stdout
+#### OUT stdout
 
 ```json
 {
@@ -158,10 +161,9 @@ where 123 is the version you wanted to update.
 
 ```yaml
 jobs:
+...
 - name: your-job-name
   plan:
-  - get: your-repo-names
-    trigger: true
     ...
   - put: resource-template
     params: { param1: "hello jeff", param2: "How are you?" }
@@ -187,8 +189,9 @@ GET would look similiar.
 
 ## TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE CI
 
-To automate the creation of the `resource-template` docker image, a concourse ci pipeline
-will unit test, build and push the docker image to dockerhub.
+To automate the creation of the `resource-template` docker image,
+a concourse ci pipeline will unit test, build and push the docker
+image to dockerhub.
 
 ![IMAGE - resource-template concourse ci piepline - IMAGE](docs/resource-template-pipeline.jpg)
 
@@ -203,7 +206,8 @@ fly -t ci set-pipeline -p resource-template -c ci/pipeline.yml --load-vars-from 
 
 ## CONCOURSE RESOURCES IN PIPELINE
 
-As seen in the pipeline diagram, the _resource-dump-to-dockerhub_ uses the resource type
+As seen in the pipeline diagram, the _resource-dump-to-dockerhub_
+uses the resource type
 [docker-image](https://github.com/concourse/docker-image-resource)
 to push a docker image to dockerhub.
 
