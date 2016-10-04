@@ -9,5 +9,8 @@ image_resource:
 inputs:
 - name: resource-template
 
+outputs:
+- name: coverage-results
+
 run:
   path: ./resource-template/ci/scripts/unit-tests.sh
