@@ -39,7 +39,7 @@ These are just placeholders that you can update where your source is.
 
 ### CHECK (a resource version(s))
 
-_CHECK will mimic getting the list of versions from a resource._
+CHECK will mimic getting the list of versions from a resource.
 
 #### CHECK stdin
 
@@ -73,7 +73,7 @@ The last number 456 will become the current ref version that will be used by IN.
 
 ### IN (fetch a resource)
 
-_IN will mimic fetching a resource and placing a file in the working directory._
+IN will mimic fetching a resource and placing a file in the working directory.
 
 #### IN Parameters
 
@@ -117,7 +117,7 @@ in the working directory:
 
 ### OUT (update a resouce)
 
-_OUT will mimic updating a resource._
+OUT will mimic updating a resource.
 
 #### OUT Parameters
 
