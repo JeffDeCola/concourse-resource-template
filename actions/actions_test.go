@@ -2,6 +2,7 @@ package actions
 
 import (
 	"log"
+	"os"
 	"reflect"
 	"testing"
 )
@@ -11,7 +12,9 @@ func Test_getversions(t *testing.T) {
 		name string
 		want []string
 	}{
-	// TODO: Add test cases.
+		{"test1",
+			[]string{"123", "3de", "456", "777"},
+		},
 	}
 	for _, tt := range tests {
 		if got := getversions(); !reflect.DeepEqual(got, tt.want) {
@@ -31,7 +34,25 @@ func TestCheck(t *testing.T) {
 		want    checkOutputJSON
 		wantErr bool
 	}{
-	// TODO: Add test cases.
+		{"test1",
+			args{
+				input: InputJSON{
+					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
+					Source: map[string]string{"source1": "sourcefoo1", "source2": "sourcefoo2"},
+					Version: version{
+						Ref: "456",
+					},
+				},
+				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
+			},
+			checkOutputJSON{
+				version{Ref: "123"},
+				version{Ref: "3de"},
+				version{Ref: "456"},
+				version{Ref: "777"},
+			},
+			false,
+		},
 	}
 	for _, tt := range tests {
 		got, err := Check(tt.args.input, tt.args.logger)
