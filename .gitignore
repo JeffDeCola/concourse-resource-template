@@ -26,4 +26,4 @@ _testmain.go
 coverage.out
 /Dockerfile
 /resource-template
-/fetch.json
+fetch.json

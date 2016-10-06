@@ -34,7 +34,7 @@ func TestCheck(t *testing.T) {
 		want    checkOutputJSON
 		wantErr bool
 	}{
-		{"test1",
+		{"known good run",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
@@ -52,6 +52,20 @@ func TestCheck(t *testing.T) {
 				version{Ref: "777"},
 			},
 			false,
+		},
+		{"Missing sorce",
+			args{
+				input: InputJSON{
+					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
+					Source: map[string]string{},
+					Version: version{
+						Ref: "456",
+					},
+				},
+				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
+			},
+			checkOutputJSON{},
+			true,
 		},
 	}
 	for _, tt := range tests {
@@ -77,7 +91,26 @@ func TestIn(t *testing.T) {
 		want    inOutputJSON
 		wantErr bool
 	}{
-	// TODO: Add test cases.
+		{"known good run",
+			args{
+				input: InputJSON{
+					Params: map[string]string{"param1": "Hello Clif", "param2": "Nice to mett you"},
+					Source: map[string]string{"source1": "sourcefoo1", "source2": "sourcefoo2"},
+					Version: version{
+						Ref: "123",
+					},
+				},
+				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
+			},
+			inOutputJSON{
+				Version: version{Ref: "123"},
+				Metadata: []metadata{
+					{Name: "nameofmonkey", Value: "Larry"},
+					{Name: "author", Value: "Jeff DeCola"},
+				},
+			},
+			false,
+		},
 	}
 	for _, tt := range tests {
 		got, err := In(tt.args.input, tt.args.logger)
@@ -102,7 +135,26 @@ func TestOut(t *testing.T) {
 		want    outOutputJSON
 		wantErr bool
 	}{
-	// TODO: Add test cases.
+		{"known good run",
+			args{
+				input: InputJSON{
+					Params: map[string]string{"param1": "Hello Clif", "param2": "Nice to mett you"},
+					Source: map[string]string{"source1": "sourcefoo1", "source2": "sourcefoo2"},
+					Version: version{
+						Ref: "123",
+					},
+				},
+				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
+			},
+			outOutputJSON{
+				Version: version{Ref: "777"},
+				Metadata: []metadata{
+					{Name: "nameofmonkey", Value: "Henry"},
+					{Name: "author", Value: "Jeff DeCola"},
+				},
+			},
+			false,
+		},
 	}
 	for _, tt := range tests {
 		got, err := Out(tt.args.input, tt.args.logger)
