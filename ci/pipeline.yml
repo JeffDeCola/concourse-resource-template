@@ -1,6 +1,17 @@
 # resource-template pipeline 
 
 jobs:
+
+- name: job-readme-github-pages
+  plan:
+  - get: resource-template
+    trigger: true
+  - task: task-readme-github-pages
+    file: resource-template/ci/tasks/task-readme-github-pages.yml
+  - put: resource-template
+    params:
+      repository: resource-template-updated
+      
 - name: job-unit-tests
   plan:
   - get: resource-template
@@ -82,7 +93,9 @@ resources:
   type: git                                                                                                                                                                                       
   source:                                                                                                                                                                                         
     branch: master                                                                                                                                                                                
-    uri: https://github.com/jeffdecola/resource-template 
+    #uri: https://github.com/jeffdecola/resource-template
+    uri: git@github.com:jeffdecola/resource-template.git
+    private_key: {{git_private_key}}
 - name: resource-dump-to-dockerhub
   type: docker-image
   source:
