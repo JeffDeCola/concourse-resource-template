@@ -27,3 +27,4 @@ coverage.out
 /Dockerfile
 /resource-template
 fetch.json
+/docs/_site/
