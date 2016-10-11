@@ -10,6 +10,8 @@
 concourse ci resource type. It is tested, built and pushed to
 dockerhub using concourse ci._
 
+[GitHub Webpage](https://jeffdecola.github.io/resource-template/)
+
 ## USE EITHER BASH SCRIPT OR GO
 
 This resource type can use either bash script or go.
@@ -193,7 +195,7 @@ To automate the creation of the `resource-template` docker image,
 a concourse ci pipeline will unit test, build and push the docker
 image to dockerhub.
 
-![IMAGE - resource-template concourse ci piepline - IMAGE](docs/resource-template-pipeline.jpg)
+![IMAGE - resource-template concourse ci piepline - IMAGE](docs/pics/resource-template-pipeline.jpg)
 
 A _ci/.credentials.yml_ file needs to be created for your _slack_url_, _repo_github_token_,
 and _dockerhub_password_.
