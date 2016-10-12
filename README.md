@@ -10,7 +10,8 @@
 Concourse resource type. It is tested, built and pushed to
 DockerHub using Concourse._
 
-[GitHub Webpage](https://jeffdecola.github.io/resource-template/)
+[GitHub Webpage](https://jeffdecola.github.io/resource-template/),
+[Docker Image](https://hub.docker.com/r/jeffdecola/resource-template)
 
 ## USE EITHER BASH SCRIPT OR GO
 
