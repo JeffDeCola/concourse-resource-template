@@ -7,8 +7,8 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
 `resource-template` _can be used as a template for developing a
-concourse ci resource type. It is tested, built and pushed to
-dockerhub using concourse ci._
+Concourse resource type. It is tested, built and pushed to
+DockerHub using Concourse._
 
 [GitHub Webpage](https://jeffdecola.github.io/resource-template/)
 
