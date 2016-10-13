@@ -42,7 +42,7 @@ func TestCheck(t *testing.T) {
 					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
 					Source: map[string]string{"source1": "sourcefoo1", "source2": "sourcefoo2"},
 					Version: version{
-						Ref: "456",
+						Ref: "123",
 					},
 				},
 				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
@@ -62,7 +62,7 @@ func TestCheck(t *testing.T) {
 					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
 					Source: map[string]string{},
 					Version: version{
-						Ref: "456",
+						Ref: "123",
 					},
 				},
 				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
@@ -101,13 +101,13 @@ func TestIn(t *testing.T) {
 					Params: map[string]string{"param1": "Hello Clif", "param2": "Nice to mett you"},
 					Source: map[string]string{"source1": "sourcefoo1", "source2": "sourcefoo2"},
 					Version: version{
-						Ref: "123",
+						Ref: "777",
 					},
 				},
 				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
 			},
 			inOutputJSON{
-				Version: version{Ref: "123"},
+				Version: version{Ref: "777"},
 				Metadata: []metadata{
 					{Name: "nameofmonkey", Value: "Larry"},
 					{Name: "author", Value: "Jeff DeCola"},
