@@ -62,7 +62,7 @@ CHECK will mimic getting the list of versions from a resource.
 
 The last number 777 will become the current ref version that will be used by IN.
 
-#### CHECK - GO RUN
+#### CHECK - go run
 
 ```bash
 echo '{
@@ -116,7 +116,7 @@ IN will mimic fetching a resource and placing a file in the working directory.
 The IN will mimic a fetch and place a fake file `fetched.json` file
 in the working directory:
 
-#### IN - GO RUN
+#### IN - go run
 
 ```bash
 echo '{
@@ -168,7 +168,7 @@ OUT will mimic updating a resource.
 
 where 777 is the version you wanted to update.
 
-#### OUT - GO RUN
+#### OUT - go run
 
 ```bash
 echo '{
