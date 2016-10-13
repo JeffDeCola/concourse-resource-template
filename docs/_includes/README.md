@@ -62,12 +62,14 @@ CHECK will mimic getting the list of versions from a resource.
 
 The last number 777 will become the current ref version that will be used by IN.
 
-#### CHECK - RUN WITH GO
+#### CHECK - GO RUN
 
 ```bash
-echo '{"params": {"param1": "Hello Clif","param2": "Nice to meet you"},
+echo '{
+"params": {"param1": "Hello Clif","param2": "Nice to meet you"},
 "source": {"source1": "sourcefoo1","source2": "sourcefoo2"},
-"version":{"ref": "456"}}' | go run main.go check $PWD
+"version":{"ref": "123"}}' |
+go run main.go check $PWD
 ```
 
 ### IN (fetch a resource)
@@ -93,7 +95,7 @@ IN will mimic fetching a resource and placing a file in the working directory.
     "source2": "sourcefoo2"
   },
   "version": {
-    "ref": "456",
+    "ref": "777",
   }
 ```
 
@@ -101,7 +103,7 @@ IN will mimic fetching a resource and placing a file in the working directory.
 
 ```json
 {
-  "version":{ "ref": "456" },
+  "version":{ "ref": "777" },
   "metadata": [
     { "name": "nameofmonkey", "value": "Larry" },
     { "name": "author","value": "Jeff DeCola" }
@@ -113,6 +115,16 @@ IN will mimic fetching a resource and placing a file in the working directory.
 
 The IN will mimic a fetch and place a fake file `fetched.json` file
 in the working directory:
+
+#### IN - GO RUN
+
+```bash
+echo '{
+"params": {"param1": "Hello Clif","param2": "Nice to meet you"},
+"source": {"source1": "sourcefoo1","source2": "sourcefoo2"},
+"version":{"ref": "777"}}' |
+go run main.go in $PWD
+```
 
 ### OUT (update a resouce)
 
@@ -146,7 +158,7 @@ OUT will mimic updating a resource.
 
 ```json
 {
-  "version":{ "ref": "123" },
+  "version":{ "ref": "777" },
   "metadata": [
     { "name": "nameofmonkey","value": "Henry" },
     { "name": "author","value": "Jeff DeCola" }
@@ -154,7 +166,17 @@ OUT will mimic updating a resource.
 }
 ```
 
-where 123 is the version you wanted to update.
+where 777 is the version you wanted to update.
+
+#### OUT - GO RUN
+
+```bash
+echo '{
+"params": {"param1": "Hello Jeff","param2": "How are you?"},
+"source": {"source1": "sourcefoo1","source2": "sourcefoo2"},
+"version":{"ref": ""}}' |
+go run main.go out $PWD
+```
 
 ## PIPELINE EXAMPLE USING PUT
 
