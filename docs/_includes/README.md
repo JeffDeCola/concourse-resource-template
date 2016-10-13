@@ -6,11 +6,11 @@ This resource type can use either bash script or go.
 
 Change _ci/Dockerfile_ to either ADD _/assets-go_ or _/assets-bash_.
 
-### USING BASH (default)
+### USING BASH
 
 The 3 bash script files located in _/assets-bash_.
 
-### USING GO
+### USING GO (default)
 
 The 3 bash scripts are located in _/assets-go_ that run _main.go_ with
 the second argument being _check_, _in_ or _out_ resepctively.
@@ -210,16 +210,16 @@ GET would look similiar.
 
 ## TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE CI
 
-To automate the creation of the `resource-template` docker image,
-a concourse ci pipeline will unit test, build and push the docker
-image to dockerhub.
+To automate the creation of the `resource-template` Docker Image,
+a concourse ci pipeline will unit test, build and push the Docker
+Image to DockerHub.
 
 ![IMAGE - resource-template concourse ci piepline - IMAGE](pics/resource-template-pipeline.jpg)
 
 A _ci/.credentials.yml_ file needs to be created for your _slack_url_, _repo_github_token_,
 and _dockerhub_password_.
 
-Use fly to upload the the pipeline file _ci/pipline.yml_ to concourse:
+Use fly to upload the the pipeline file _ci/pipline.yml_ to Concourse:
 
 ```bash
 fly -t ci set-pipeline -p resource-template -c ci/pipeline.yml --load-vars-from ci/.credentials.yml
@@ -228,15 +228,15 @@ fly -t ci set-pipeline -p resource-template -c ci/pipeline.yml --load-vars-from 
 ## CONCOURSE RESOURCES IN PIPELINE
 
 As seen in the pipeline diagram, the _resource-dump-to-dockerhub_
-uses the resource type
+uses the Cocourse resource type
 [docker-image](https://github.com/concourse/docker-image-resource)
-to push a docker image to dockerhub.
+to push a Docker Image to DockerHub.
 
-`resource-template` also contains a few extra concourse resources:
+`resource-template` also contains a few extra Concourse resources:
 
-* A resource (_resource-slack-alert_) uses a [docker image](https://hub.docker.com/r/cfcommunity/slack-notification-resource)
+* A resource (_resource-slack-alert_) uses a [Docker Image](https://hub.docker.com/r/cfcommunity/slack-notification-resource)
   that will notify slack on your progress.
-* A resource (_resource-repo-status_) use a [docker image](https://hub.docker.com/r/dpb587/github-status-resource)
+* A resource (_resource-repo-status_) use a [Docker Image](https://hub.docker.com/r/dpb587/github-status-resource)
   that will update your git status for that particular commit.
 
-These resources can be easily removed from the pipeline.
+These above resources can be removed from the pipeline.
