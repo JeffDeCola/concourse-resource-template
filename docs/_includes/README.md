@@ -54,12 +54,21 @@ CHECK will mimic getting the list of versions from a resource.
   { "ref": "123" },
   { "ref": "3de" },
   { "ref": "456" }
+  { "ref": "777" }
 ]
 ```
 
-456 is the latest version that will be used.
+777 is the latest version that will be used.
 
-The last number 456 will become the current ref version that will be used by IN.
+The last number 777 will become the current ref version that will be used by IN.
+
+#### CHECK - RUN WITH GO
+
+```bash
+echo '{"params": {"param1": "Hello Clif","param2": "Nice to meet you"},
+"source": {"source1": "sourcefoo1","source2": "sourcefoo2"},
+"version":{"ref": "456"}}' | go run main.go check $PWD
+```
 
 ### IN (fetch a resource)
 
