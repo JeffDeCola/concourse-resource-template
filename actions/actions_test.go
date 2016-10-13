@@ -12,7 +12,8 @@ func Test_getversions(t *testing.T) {
 		name string
 		want []string
 	}{
-		{"test1",
+		{
+			"test1",
 			[]string{"123", "3de", "456", "777"},
 		},
 	}
@@ -34,7 +35,8 @@ func TestCheck(t *testing.T) {
 		want    checkOutputJSON
 		wantErr bool
 	}{
-		{"known good run",
+		{
+			"known good run",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
@@ -53,7 +55,8 @@ func TestCheck(t *testing.T) {
 			},
 			false,
 		},
-		{"Missing sorce",
+		{
+			"Missing sorce",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
@@ -91,7 +94,8 @@ func TestIn(t *testing.T) {
 		want    inOutputJSON
 		wantErr bool
 	}{
-		{"known good run",
+		{
+			"known good run",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Clif", "param2": "Nice to mett you"},
@@ -135,7 +139,8 @@ func TestOut(t *testing.T) {
 		want    outOutputJSON
 		wantErr bool
 	}{
-		{"known good run",
+		{
+			"known good run",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Clif", "param2": "Nice to mett you"},
