@@ -12,7 +12,8 @@ func Test_getversions(t *testing.T) {
 		name string
 		want []string
 	}{
-		{"test1",
+		{
+			"test1",
 			[]string{"123", "3de", "456", "777"},
 		},
 	}
@@ -34,13 +35,14 @@ func TestCheck(t *testing.T) {
 		want    checkOutputJSON
 		wantErr bool
 	}{
-		{"known good run",
+		{
+			"known good run",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
 					Source: map[string]string{"source1": "sourcefoo1", "source2": "sourcefoo2"},
 					Version: version{
-						Ref: "456",
+						Ref: "123",
 					},
 				},
 				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
@@ -53,13 +55,14 @@ func TestCheck(t *testing.T) {
 			},
 			false,
 		},
-		{"Missing sorce",
+		{
+			"Missing sorce",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Jeff", "param2": "How are you?"},
 					Source: map[string]string{},
 					Version: version{
-						Ref: "456",
+						Ref: "123",
 					},
 				},
 				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
@@ -91,19 +94,20 @@ func TestIn(t *testing.T) {
 		want    inOutputJSON
 		wantErr bool
 	}{
-		{"known good run",
+		{
+			"known good run",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Clif", "param2": "Nice to mett you"},
 					Source: map[string]string{"source1": "sourcefoo1", "source2": "sourcefoo2"},
 					Version: version{
-						Ref: "123",
+						Ref: "777",
 					},
 				},
 				logger: log.New(os.Stderr, "resource:", log.Lshortfile),
 			},
 			inOutputJSON{
-				Version: version{Ref: "123"},
+				Version: version{Ref: "777"},
 				Metadata: []metadata{
 					{Name: "nameofmonkey", Value: "Larry"},
 					{Name: "author", Value: "Jeff DeCola"},
@@ -135,7 +139,8 @@ func TestOut(t *testing.T) {
 		want    outOutputJSON
 		wantErr bool
 	}{
-		{"known good run",
+		{
+			"known good run",
 			args{
 				input: InputJSON{
 					Params: map[string]string{"param1": "Hello Clif", "param2": "Nice to mett you"},

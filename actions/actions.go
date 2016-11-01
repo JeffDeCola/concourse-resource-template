@@ -121,7 +121,7 @@ func In(input InputJSON, logger *log.Logger) (inOutputJSON, error) {
 	// IN (FETCH THE RESOURCE) *************************************************************************
 	// Mimic a fetch and place a fetched.json file in the working directory that contains the following.
 
-	jsonfile := "Hi everone, This is a file I made"
+	jsonfile := `{"version":{"ref":"777"},"metadata":{"happy":"days"}}`
 
 	// Create a fake fetched file
 	filewrite, err := os.Create("fetch.json")
