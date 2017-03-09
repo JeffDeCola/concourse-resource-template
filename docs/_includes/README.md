@@ -1,6 +1,6 @@
 [Docker Image](https://hub.docker.com/r/jeffdecola/resource-template)
 
-## USE EITHER BASH SCRIPT OR GO
+# USE EITHER BASH SCRIPT OR GO
 
 This resource type can use either bash script or go.
 
