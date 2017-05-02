@@ -1,4 +1,4 @@
-[Docker Image](https://hub.docker.com/r/jeffdecola/resource-template)
+[Docker Image](https://hub.docker.com/r/jeffdecola/gce-instance-resource)
 
 # USE EITHER BASH SCRIPT OR GO
 
@@ -186,7 +186,7 @@ jobs:
 - name: your-job-name
   plan:
     ...
-  - put: resource-template
+  - put: gce-instance-resource
     params: { param1: "hello jeff", param2: "How are you?" }
 
 resource_types:
@@ -194,12 +194,12 @@ resource_types:
 - name: jeffs-resource
   type: docker-image
   source:
-   repository: jeffdecola/resource-template
+   repository: jeffdecola/gce-instance-resource
    tag: latest
 
 resources:
   ...
-- name: resource-template
+- name: gce-instance-resource
   type: jeffs-resource
   source:
     source1: foo1
@@ -210,11 +210,11 @@ GET would look similiar.
 
 ## TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE CI
 
-To automate the creation of the `resource-template` Docker Image,
+To automate the creation of the `gce-instance-resource` Docker Image,
 a concourse ci pipeline will unit test, build and push the Docker
 Image to DockerHub.
 
-![IMAGE - resource-template concourse ci piepline - IMAGE](pics/resource-template-pipeline.jpg)
+![IMAGE - gce-instance-resource concourse ci piepline - IMAGE](pics/gce-instance-resource-pipeline.jpg)
 
 A _ci/.credentials.yml_ file needs to be created for your _slack_url_, _repo_github_token_,
 and _dockerhub_password_.
@@ -222,7 +222,7 @@ and _dockerhub_password_.
 Use fly to upload the the pipeline file _ci/pipline.yml_ to Concourse:
 
 ```bash
-fly -t ci set-pipeline -p resource-template -c ci/pipeline.yml --load-vars-from ci/.credentials.yml
+fly -t ci set-pipeline -p gce-instance-resource -c ci/pipeline.yml --load-vars-from ci/.credentials.yml
 ```
 
 ## CONCOURSE RESOURCES IN PIPELINE
@@ -232,7 +232,7 @@ uses the Cocourse resource type
 [docker-image](https://github.com/concourse/docker-image-resource)
 to push a Docker Image to DockerHub.
 
-`resource-template` also contains a few extra Concourse resources:
+`gce-instance-resource` also contains a few extra Concourse resources:
 
 * A resource (_resource-slack-alert_) uses a [Docker Image](https://hub.docker.com/r/cfcommunity/slack-notification-resource)
   that will notify slack on your progress.
