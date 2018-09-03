@@ -1,4 +1,4 @@
-# resource-template pipeline 
+# resource-template pipeline.yml
 
 jobs:
 
@@ -6,16 +6,39 @@ jobs:
   plan:
   - get: resource-template
     trigger: true
+  - put: resource-slack-alert
+    params:
+      channel: '#jeff-builds'
+      text: "From resource-template: STARTED job-readme-github-pages in concourse ci."
+  - put: resource-repo-status
+    params: { state: "pending", description: "STARTED job-readme-github-pages in concourse ci.", commit: "resource-template" }
   - task: task-readme-github-pages
     file: resource-template/ci/tasks/task-readme-github-pages.yml
-  - put: resource-template
-    params:
-      repository: resource-template-updated
-      
+    on_success:
+      do:
+      - put: resource-template
+        params:
+          repository: resource-template-updated  
+      - put: resource-slack-alert
+        params:
+          channel: '#jeff-builds'
+          text: "From resource-template: PASSED job-readme-github-pages in concourse ci."
+      - put: resource-repo-status
+        params: { state: "success", description: "PASSED job-readme-github-pages in concourse ci", commit: "resource-template" }
+    on_failure:
+      do:
+      - put: resource-slack-alert
+        params:
+          channel: '#jeff-builds'
+          text: "From resource-template: FAILED job-readme-github-pages in concourse ci."
+      - put: resource-repo-status
+        params: { state: "failure", description: "FAILED job-readme-github-pages in concourse ci", commit: "resource-template" }
+
 - name: job-unit-tests
   plan:
   - get: resource-template
     trigger: true
+    passed: [job-readme-github-pages]
   - put: resource-slack-alert
     params:
       channel: '#jeff-builds'
@@ -26,6 +49,9 @@ jobs:
     file: resource-template/ci/tasks/task-unit-tests.yml
     on_success:
       do:
+      - put: resource-template
+        params:
+          repository: resource-template  
       - put: resource-slack-alert
         params:
           channel: '#jeff-builds'
@@ -34,7 +60,7 @@ jobs:
             From resource-template: PASSED job-unit-tests in concourse ci. 
             $TEXT_FILE_CONTENT
       - put: resource-repo-status
-        params: { state: "pending", description: "PASSED job-unit-tests in concourse ci", commit: "resource-template" }
+        params: { state: "success", description: "PASSED job-unit-tests in concourse ci", commit: "resource-template" }
     on_failure:
       do:
       - put: resource-slack-alert
@@ -66,7 +92,7 @@ jobs:
             channel: '#jeff-builds'
             text: "From resource-template: PASSED job-build in concourse ci."
         - put: resource-repo-status
-          params: { state: "success", description: "PASSED job-build in concourse ci.", commit: "resource-template" }
+          params: { state: "pending", description: "PASSED job-build in concourse ci.", commit: "resource-template" }
       on_failure:
         do:
         - put: resource-slack-alert
@@ -75,8 +101,9 @@ jobs:
             text: "From resource-template: FAILED job-build in concourse ci."
         - put: resource-repo-status
           params: { state: "failure", description: "FAILED job-build in concourse ci.", commit: "resource-template" }
-
+    
 resource_types:
+
 - name: slack-notification
   type: docker-image
   source:
@@ -89,12 +116,13 @@ resource_types:
     tag: master
 
 resources:
-- name: resource-template                                                                                                                                                                         
-  type: git                                                                                                                                                                                       
-  source:                                                                                                                                                                                         
-    branch: master                                                                                                                                                                                
+
+- name: resource-template
+  type: git
+  source:
     #uri: https://github.com/jeffdecola/resource-template
     uri: git@github.com:jeffdecola/resource-template.git
+    branch: master
     private_key: {{git_private_key}}
 - name: resource-dump-to-dockerhub
   type: docker-image
