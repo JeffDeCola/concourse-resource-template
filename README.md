@@ -1,12 +1,12 @@
-# resource-template
+# gce-instance-resource
 
-[![Code Climate](https://codeclimate.com/github/JeffDeCola/resource-template/badges/gpa.svg)](https://codeclimate.com/github/JeffDeCola/resource-template)
-[![Issue Count](https://codeclimate.com/github/JeffDeCola/resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/resource-template/issues)
-[![Go Report Card](https://goreportcard.com/badge/jeffdecola/resource-template)](https://goreportcard.com/report/jeffdecola/resource-template)
-[![GoDoc](https://godoc.org/github.com/JeffDeCola/resource-template?status.svg)](https://godoc.org/github.com/JeffDeCola/resource-template)
+[![Code Climate](https://codeclimate.com/github/JeffDeCola/gce-instance-resource/badges/gpa.svg)](https://codeclimate.com/github/JeffDeCola/gce-instance-resource)
+[![Issue Count](https://codeclimate.com/github/JeffDeCola/gce-instance-resource/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/gce-instance-resource/issues)
+[![Go Report Card](https://goreportcard.com/badge/jeffdecola/gce-instance-resource)](https://goreportcard.com/report/jeffdecola/gce-instance-resource)
+[![GoDoc](https://godoc.org/github.com/JeffDeCola/gce-instance-resource?status.svg)](https://godoc.org/github.com/JeffDeCola/gce-instance-resource)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
-`resource-template` _can be used as a template for developing a
+`gce-instance-resource` _can be used as a template for developing a
 Concourse resource type. It is tested, built and pushed to
 DockerHub using Concourse._
 
@@ -200,7 +200,7 @@ jobs:
 - name: your-job-name
   plan:
     ...
-  - put: resource-template
+  - put: gce-instance-resource
     params: { param1: "hello jeff", param2: "How are you?" }
 
 resource_types:
@@ -208,12 +208,12 @@ resource_types:
 - name: jeffs-resource
   type: docker-image
   source:
-   repository: jeffdecola/resource-template
+   repository: jeffdecola/gce-instance-resource
    tag: latest
 
 resources:
   ...
-- name: resource-template
+- name: gce-instance-resource
   type: jeffs-resource
   source:
     source1: foo1
