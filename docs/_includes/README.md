@@ -185,7 +185,7 @@ jobs:
 - name: your-job-name
   plan:
     ...
-  - put: gce-instance-resource
+  - put: resource-template
     params: { param1: "hello jeff", param2: "How are you?" }
 
 resource_types:
@@ -193,12 +193,12 @@ resource_types:
 - name: jeffs-resource
   type: docker-image
   source:
-   repository: jeffdecola/gce-instance-resource
+   repository: jeffdecola/resource-template
    tag: latest
 
 resources:
   ...
-- name: gce-instance-resource
+- name: resource-template
   type: jeffs-resource
   source:
     source1: foo1
