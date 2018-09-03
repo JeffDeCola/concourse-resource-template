@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/resource-marathon-deploy "out" "$1"
