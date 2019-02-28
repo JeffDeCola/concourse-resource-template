@@ -1,16 +1,17 @@
 # resource-template
 
-[![Code Climate](https://codeclimate.com/github/JeffDeCola/resource-template/badges/gpa.svg)](https://codeclimate.com/github/JeffDeCola/resource-template)
-[![Issue Count](https://codeclimate.com/github/JeffDeCola/resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/resource-template/issues)
-[![Go Report Card](https://goreportcard.com/badge/jeffdecola/resource-template)](https://goreportcard.com/report/jeffdecola/resource-template)
+[![Go Report Card](https://goreportcard.com/badge/github.com/JeffDeCola/resource-template)](https://goreportcard.com/report/github.com/JeffDeCola/resource-template)
 [![GoDoc](https://godoc.org/github.com/JeffDeCola/resource-template?status.svg)](https://godoc.org/github.com/JeffDeCola/resource-template)
+[![Maintainability](https://api.codeclimate.com/v1/badges/01bea19f2f3e1e3a17da/maintainability)](https://codeclimate.com/github/JeffDeCola/resource-template/maintainability)
+[![Issue Count](https://codeclimate.com/github/JeffDeCola/resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/resource-template/issues)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
 `resource-template` _can be used as a template for developing a
 Concourse resource type. It is tested, built and pushed to
 DockerHub using Concourse._
 
-[resource-template Docker Image](https://hub.docker.com/r/jeffdecola/resource-template) on DockerHub.
+[resource-template Docker Image](https://hub.docker.com/r/jeffdecola/resource-template)
+on DockerHub.
 
 [resource-template GitHub Webpage](https://jeffdecola.github.io/resource-template/)
 
@@ -27,9 +28,9 @@ The 3 bash script files located in _/assets-bash_.
 ### USING GO (default)
 
 The 3 bash scripts are located in _/assets-go_ that run _main.go_ with
-the second argument being _check_, _in_ or _out_ resepctively.
+the second argument being _check_, _in_ or _out_ respectively.
 Hence only one file _main.go_ need to be maintained, rather
-than three seperate files.
+than three separate files.
 
 ## SOURCE CONFIGURATION
 
