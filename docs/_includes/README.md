@@ -12,9 +12,9 @@ The 3 bash script files located in _/assets-bash_.
 ### USING GO (default)
 
 The 3 bash scripts are located in _/assets-go_ that run _main.go_ with
-the second argument being _check_, _in_ or _out_ resepctively.
+the second argument being _check_, _in_ or _out_ respectively.
 Hence only one file _main.go_ need to be maintained, rather
-than three seperate files.
+than three separate files.
 
 ## SOURCE CONFIGURATION
 
