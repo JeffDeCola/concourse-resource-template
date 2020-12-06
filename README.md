@@ -6,9 +6,7 @@
 [![Issue Count](https://codeclimate.com/github/JeffDeCola/resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/resource-template/issues)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 
-`resource-template` _can be used as a template for developing a
-Concourse resource type. It is tested, built and pushed to
-DockerHub using Concourse._
+_Used as a template for developing a Concourse resource type._
 
 [resource-template Docker Image](https://hub.docker.com/r/jeffdecola/resource-template)
 on DockerHub.
@@ -102,7 +100,7 @@ IN will mimic fetching a resource and placing a file in the working directory.
 ```json
 {
   "params": {
-    "param1": "Hello Clif",
+    "param1": "Hello Jeff",
     "param2": "Nice to meet you"
   },
   "source": {
@@ -141,7 +139,7 @@ echo '{
 go run main.go in $PWD
 ```
 
-### OUT (update a resouce)
+### OUT (update a resource)
 
 OUT will mimic updating a resource.
 
@@ -251,3 +249,8 @@ to push a docker image to dockerhub.
 
 For more information on using concourse for continuous integration,
 refer to my cheat sheet on [concourse](https://github.com/JeffDeCola/my-cheat-sheets/tree/master/software/operations-tools/continuous-integration-continuous-deployment/concourse-cheat-sheet).
+
+TEST IT
+
+This is located under ci-test
+
