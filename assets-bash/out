@@ -30,7 +30,7 @@ tree
 # -M = Monochrome output
 # -S = Sort order, 
 # . =  get everything.
-jq -M -S . < /dev/stdin | tee /tmp/input.json    # tee redirects to a file.
+jq -M -S . <&0 | tee /tmp/input.json >/dev/null    # tee redirects to a file.
 
 echo "json stdin is:"
 cat /tmp/input.json
