@@ -1,17 +1,28 @@
-# resource-template
+# CONCOURSE RESOURCE TEMPLATE
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/JeffDeCola/resource-template)](https://goreportcard.com/report/github.com/JeffDeCola/resource-template)
-[![GoDoc](https://godoc.org/github.com/JeffDeCola/resource-template?status.svg)](https://godoc.org/github.com/JeffDeCola/resource-template)
-[![Maintainability](https://api.codeclimate.com/v1/badges/01bea19f2f3e1e3a17da/maintainability)](https://codeclimate.com/github/JeffDeCola/resource-template/maintainability)
-[![Issue Count](https://codeclimate.com/github/JeffDeCola/resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/resource-template/issues)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
+[![Tag Latest](https://img.shields.io/github/v/tag/jeffdecola/concourse-resource-template)](https://github.com/JeffDeCola/concourse-resource-template/tags)
+[![Go Reference](https://pkg.go.dev/badge/github.com/JeffDeCola/concourse-resource-template.svg)](https://pkg.go.dev/github.com/JeffDeCola/concourse-resource-template)
+[![Go Report Card](https://goreportcard.com/badge/github.com/JeffDeCola/concourse-resource-template)](https://goreportcard.com/report/github.com/JeffDeCola/concourse-resource-template)
+[![codeclimate Maintainability](https://api.codeclimate.com/v1/badges/5abc7e41bcf4e122e7f7/maintainability)](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/maintainability)
+[![codeclimate Issue Count](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/issues)
+[![Docker Pulls](https://badgen.net/docker/pulls/jeffdecola/concourse-resource-template?icon=docker&label=pulls)](https://hub.docker.com/r/jeffdecola/crypto-wallet-status/)
+[![MIT License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
+[![jeffdecola.com](https://img.shields.io/badge/website-jeffdecola.com-blue)](https://jeffdecola.com)
 
 _Used as a template for developing a Concourse resource type._
 
-[resource-template Docker Image](https://hub.docker.com/r/jeffdecola/resource-template)
-on DockerHub.
+Table of Contents
 
-[resource-template GitHub Webpage](https://jeffdecola.github.io/resource-template/)
+* tbd
+
+Documentation and Reference
+
+* [concourse-resource-template Docker Image](https://hub.docker.com/r/jeffdecola/resource-template)
+  on DockerHub
+* This repos
+  [github webpage](https://jeffdecola.github.io/concourse-resource-template/)
+  _built with
+  [concourse](https://github.com/JeffDeCola/concourse-resource-template/blob/master/ci-README.md)_
 
 ## USE EITHER BASH SCRIPT OR GO
 
@@ -220,37 +231,3 @@ resources:
 ```
 
 GET would look similiar.
-
-## TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE
-
-To automate the creation of the `resource-template` docker image, a concourse pipeline
-will,
-
-* Update README.md for resource-template github webpage.
-* Unit Test the code.
-* Build the docker image `resource-template` and push to DockerHub.
-
-![IMAGE - resource-template concourse ci pipeline - IMAGE](docs/pics/resource-template-pipeline.jpg)
-
-As seen in the pipeline diagram, the _resource-dump-to-dockerhub_ uses
-the resource type
-[docker-image](https://github.com/concourse/docker-image-resource)
-to push a docker image to dockerhub.
-
-`resource-template` also contains a few extra concourse resources:
-
-* A resource (_resource-slack-alert_) uses a [docker image](https://hub.docker.com/r/cfcommunity/slack-notification-resource)
-  that will notify slack on your progress.
-* A resource (_resource-repo-status_) use a [docker image](https://hub.docker.com/r/dpb587/github-status-resource)
-  that will update your git status for that particular commit.
-* A resource ([_`resource-template`_](https://github.com/JeffDeCola/resource-template))
-  that can be used as a starting point and template for creating other concourse
-  ci resources.
-
-For more information on using concourse for continuous integration,
-refer to my cheat sheet on [concourse](https://github.com/JeffDeCola/my-cheat-sheets/tree/master/software/operations-tools/continuous-integration-continuous-deployment/concourse-cheat-sheet).
-
-TEST IT
-
-This is located under ci-test
-

@@ -1,4 +1,4 @@
-// resource-template main.go
+// concourse-resource-template main.go
 
 package main
 
@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/JeffDeCola/resource-template/actions"
+	"github.com/JeffDeCola/concourse-resource-template/actions"
 )
 
 // dumpinput ...
