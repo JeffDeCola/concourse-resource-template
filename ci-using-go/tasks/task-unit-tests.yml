@@ -1,0 +1,20 @@
+# concourse-resource-template task-unit-tests.yml
+
+platform: linux
+
+# DOCKER BASE IMAGE FOR TASKS (BASED ON ALPINE, A SMALLER LINUX DISTRIBUTION)
+image_resource:
+  type: docker-image
+  source:
+    repository: golang
+    tag: 1.20.1
+
+inputs:
+  - name: concourse-resource-template
+
+outputs:
+  - name: coverage-results
+
+run:
+  path: ./concourse-resource-template/ci/scripts/unit-tests.sh
+  # args: [-debug]

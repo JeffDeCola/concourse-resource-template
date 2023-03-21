@@ -1,0 +1,152 @@
+# concourse-resource-template pipeline.yml
+
+#------------------------------------------------------------------------------------------
+jobs:
+
+#**********************************************
+- name: job-readme-github-pages
+#**********************************************
+  plan:
+
+    # GET REPO FROM GITHUB
+    - get: concourse-resource-template
+      trigger: true
+    # SEND SLACK ALERT  
+    - put: resource-slack-alert
+      params:
+        channel: '#jeff-builds'
+        text: "From concourse-resource-template: STARTED job-readme-github-pages in concourse ci."
+    # SEND GITHUB STATUS
+    - put: resource-repo-status
+      params: { state: "pending", description: "STARTED job-readme-github-pages in concourse ci.", commit: "concourse-resource-template" }    
+    
+    # RUN TASK IN REPO USING ALPINE DOCKER IMAGE
+    - task: task-readme-github-pages
+      file: concourse-resource-template/ci/tasks/task-readme-github-pages.yml
+      
+      # TASK SUCCESS
+      on_success:
+        do:
+          # PUSH NEW REPO TO GITHUB
+          - put: concourse-resource-template
+            params:
+              repository: concourse-resource-template-updated  
+          # SEND SLACK ALERT  
+          - put: resource-slack-alert
+            params:
+              channel: '#jeff-builds'
+              text: "From concourse-resource-template: PASSED job-readme-github-pages in concourse ci."
+          # SEND GITHUB STATUS
+          - put: resource-repo-status
+            params: { state: "success", description: "PASSED job-readme-github-pages in concourse ci", commit: "concourse-resource-template" }
+      
+      # TASK FAILURE   
+      on_failure:
+        do:
+          # SEND SLACK ALERT  
+          - put: resource-slack-alert
+            params:
+              channel: '#jeff-builds'
+              text: "From concourse-resource-template: FAILED job-readme-github-pages in concourse ci."
+          # SEND GITHUB STATUS
+          - put: resource-repo-status
+            params: { state: "failure", description: "FAILED job-readme-github-pages in concourse ci", commit: "concourse-resource-template" }
+
+#**********************************************
+- name: job-build-push
+#**********************************************
+  plan:
+
+    # GET REPO FROM GITHUB
+    - get: concourse-resource-template
+      trigger: true
+      passed: [job-readme-github-pages]
+    # SEND SLACK ALERT  
+    - put: resource-slack-alert
+      params:
+        channel: '#jeff-builds'
+        text: "From concourse-resource-template: STARTED job-build-push in concourse ci."
+    # SEND GITHUB STATUS
+    - put: resource-repo-status
+      params: { state: "pending", description: "STARTED job-build-push in concourse ci.", commit: "concourse-resource-template" }
+
+    # RUN TASK IN REPO USING ALPINE DOCKER IMAGE 
+    - task: task-build-push
+      file: concourse-resource-template/ci/tasks/task-build-push.yml
+
+    # PUSH DOCKER IMAGE TO DOCKERHUB  
+    - put: resource-dump-to-dockerhub
+      params: { build: "dist"}
+      
+      # TASK SUCCESS
+      on_success:
+        do:
+          # SEND SLACK ALERT  
+          - put: resource-slack-alert
+            params:
+              channel: '#jeff-builds'
+              text: "From concourse-resource-template: PASSED job-build-push in concourse ci."
+          # SEND GITHUB STATUS
+          - put: resource-repo-status
+            params: { state: "pending", description: "PASSED job-build-push in concourse ci.", commit: "concourse-resource-template" }
+      
+      # TASK FAILURE    
+      on_failure:
+        do:
+          # SEND SLACK ALERT  
+          - put: resource-slack-alert
+            params:
+              channel: '#jeff-builds'
+              text: "From concourse-resource-template: FAILED job-build-push in concourse ci."
+          # SEND GITHUB STATUS
+          - put: resource-repo-status
+            params: { state: "failure", description: "FAILED job-build-push in concourse ci.", commit: "concourse-resource-template" }
+
+#------------------------------------------------------------------------------------------
+resource_types:
+
+  - name: slack-notification
+    type: docker-image
+    source:
+      repository: cfcommunity/slack-notification-resource
+      tag: latest
+
+  - name: github-status
+    type: docker-image
+    source:
+      repository: dpb587/github-status-resource
+      tag: master
+
+#------------------------------------------------------------------------------------------
+resources:
+
+  - name: concourse-resource-template
+    type: git
+    icon: github
+    source:
+      #uri: https://github.com/jeffdecola/concourse-resource-template
+      uri: git@github.com:jeffdecola/concourse-resource-template.git
+      branch: master
+      private_key: ((git_private_key))
+
+  - name: resource-dump-to-dockerhub
+    type: docker-image
+    icon: docker
+    source:
+      repository: jeffdecola/concourse-resource-template
+      tag: latest
+      username: jeffdecola
+      password: ((dockerhub_password))
+
+  - name: resource-slack-alert
+    type: slack-notification
+    icon: slack
+    source:
+      url: ((slack_url)) 
+
+  - name: resource-repo-status 
+    type: github-status
+    icon: github
+    source:
+      repository: jeffdecola/concourse-resource-template 
+      access_token: ((repo_github_token))
