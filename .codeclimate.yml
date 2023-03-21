@@ -35,4 +35,5 @@ plugins:
 # - <pattern>
 exclude_patterns:
 - "docs/"
+- "build-resource-using-go-in-development/"
 - "**/*_test.go"
