@@ -7,12 +7,12 @@ A concourse resource is a docker image.
 
 It requires 3 kinds of scripts or executables,
 
-* **check** - Detecting new versions of the resource (i.e. git version)
+* **check** - Detecting new versions of the resource (e.g. git version)
 * **in** - Fetching something
 * **out** - Updating something
 
-You build your Resource Docker Image with a Dockerfile by using the
-`concourse docker base image` and adding your executables to `/opt/resource`.
+You build your resource with a Dockerfile by using the
+`concourse docker base image` and adding your scripts/executables to `/opt/resource`.
 
 The three scripts/executables can be written with bash or go,
 
@@ -144,14 +144,12 @@ Where 777 is the version you wanted to update.
 
 ## BUILD AND PUSH THE RESOURCE
 
-I am using bash to build the resource. go is still in development.
+I am using bash shell scripts to build the resource docker image. Using go is still in development.
 
 To
 [build.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/build.sh)
-the resource docker image using the
+using the
 [Dockerfile](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/Dockerfile),
-
-```bash
 
 ```bash
 cd build-resource-using-bash/build
@@ -171,6 +169,8 @@ sh push.sh
 
 ## TEST THIS RESOURCE
 
+Now we can test the resource in a concourse pipeline.
+
 To [set-pipeline.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-this-resource/set-pipeline.sh)
 for concourse,
 
@@ -180,7 +180,7 @@ sh set-pipeline.sh.
 ```
 
 Where the
-[pipeline.yml](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-resource/pipeline.yml),
+[pipeline.yml](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-this-resource/pipeline.yml),
 
 ```yml
 #------------------------------------------------------------------------------------------
@@ -205,7 +205,7 @@ jobs:
           - put: concourse-resource-template-test
             params:
               param1: "Hello jeff"
-              param2: "How are you?"    
+              param2: "How are you?"
 
 #------------------------------------------------------------------------------------------
 resource_types:
