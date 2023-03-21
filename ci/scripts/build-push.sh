@@ -42,8 +42,8 @@ echo "SETUP THE BUILD IN /dist -------------------------------------------------
 echo " "
 
 echo "Copy what you want to make binary of (i.e. go build) into dist"
-echo "cp -r concourse-resource-template/concourse-resource-template-code/* dist"
-cp -r concourse-resource-template/concourse-resource-template-code/* dist
+echo "cp -r concourse-resource-template/build-resource-using-bash* dist"
+cp -r concourse-resource-template/build-resource-using-bash* dist
 echo " "
 
 echo "Copy the Dockefile into dist"
@@ -83,11 +83,11 @@ echo " "
 #echo " "
 
 #echo "cp the binary into /dist"
-#cp "$GOPATH/src/github.com/JeffDeCola/concourse-resource-template/concourse-resource-template-code/bin/hello-go" .
+#cp "$GOPATH/src/github.com/JeffDeCola/concourse-resource-template/build-resource-using-bashbin/hello-go" .
 #echo " "
 
 #echo "cp the Dockerfile into /dist"
-#cp "$GOPATH/src/github.com/JeffDeCola/concourse-resource-template/concourse-resource-template-code/build-push/Dockerfile" .
+#cp "$GOPATH/src/github.com/JeffDeCola/concourse-resource-template/build-resource-using-bashbuild-push/Dockerfile" .
 #echo " "
 
 #echo "Make it executable by all - chmod +x"
