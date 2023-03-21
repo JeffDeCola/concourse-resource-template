@@ -180,8 +180,6 @@ the resource docker image using the
 [Dockerfile](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/Dockerfile),
 
 ```bash
-
-```bash
 cd build-resource-using-bash/build
 sh build-resource.sh
 ```
@@ -233,7 +231,7 @@ jobs:
           - put: concourse-resource-template-test
             params:
               param1: "Hello jeff"
-              param2: "How are you?"    
+              param2: "How are you?"
 
 #------------------------------------------------------------------------------------------
 resource_types:

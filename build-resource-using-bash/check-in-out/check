@@ -30,10 +30,10 @@ source1=$(jq -r .source.source1 < /tmp/input.json)
 source2=$(jq -r .source.source2 < /tmp/input.json)
 ref=$(jq -r .version.ref < /tmp/input.json)
 echo "source are"
-echo $source1 $source2
+echo "$source1" "$source2"
 echo ""
 echo "ref is"
-echo $ref
+echo "$ref"
 echo ""
 
 echo "pwd is"
