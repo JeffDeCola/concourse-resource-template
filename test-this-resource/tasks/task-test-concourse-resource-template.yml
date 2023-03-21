@@ -8,11 +8,11 @@ image_resource:
     repository: golang
     tag: 1.20.1
 
-inputs:
-  - name: concourse-resource-template
+#inputs:
+#  - name: concourse-resource-template
 
-outputs:
-  - name: concourse-resource-template-updated
+#outputs:
+#  - name: concourse-resource-template-updated
 
 run:
   path: ./concourse-resource-template/test-resource/scripts/test-concourse-resource-template.sh
