@@ -18,11 +18,11 @@ echo ""
 WORKING_DIR=$1
 echo "WORKING_DIR = $WORKING_DIR"
 echo "List whats in the working directory"
-ls -lat $WORKING_DIR
+ls -lat "$WORKING_DIR"
 echo ""
 
 # We imported tree into the build.  Not needed, but fun to know how to do it.
-cd $WORKING_DIR
+cd "$WORKING_DIR"
 tree
 
 #  INPUT **************************************************************************************
@@ -42,10 +42,10 @@ source2=$(jq -r .source.source2 < /tmp/input.json)
 param1=$(jq -r .params.param1 < /tmp/input.json)
 param2=$(jq -r .params.param2 < /tmp/input.json)
 echo "source are"
-echo $source1 $source2
+echo "$source1" "$source2"
 echo ""
 echo "params are"
-echo $param1 $param2
+echo "$param1" "$param2"
 echo ""
 
 echo "pwd is"
