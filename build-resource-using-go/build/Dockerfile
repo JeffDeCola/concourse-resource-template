@@ -11,10 +11,10 @@ COPY bin/tree /bin
 
 # REQUIRED BY CONCROUSE RESOURCE
 ADD /assets-go/check /opt/resource/check
-# ADD /assets-bash/check /opt/resource/check
+# ADD /check-in-out/check /opt/resource/check
 ADD /assets-go/in /opt/resource/in
-# ADD /assets-bash/in /opt/resource/in
+# ADD /check-in-out/in /opt/resource/in
 ADD /assets-go/out /opt/resource/out
-# ADD /assets-bash/out /opt/resource/out
+# ADD /check-in-out/out /opt/resource/out
 
 RUN chmod +x /opt/resource/*

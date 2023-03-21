@@ -38,7 +38,7 @@ echo "List whats in the current directory"
 ls -la
 echo " "
 
-echo "DO SEOMTHING?????????????????? -------------------------------------------------------"
+echo "DO SOMETHING -------------------------------------------------------------------------"
 echo " "
 
 echo "test-concourse-resource-template.sh (END)"
