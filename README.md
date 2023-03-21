@@ -22,7 +22,7 @@ Table of Contents
 
 Documentation and Reference
 
-* [concourse-resource-template Docker Image](https://hub.docker.com/r/jeffdecola/resource-template)
+* [concourse-resource-template docker image](https://hub.docker.com/r/jeffdecola/concourse-resource-template)
   on DockerHub
 * This repos
   [github webpage](https://jeffdecola.github.io/concourse-resource-template/)
@@ -44,12 +44,16 @@ You build your Resource Docker Image with a Dockerfile by using the
 
 The three scripts/executables can be written with bash or go,
 
-* The go is build is located in /build-resource-using-go
-* The bash build is located in /build-resource-using-bash
+* The go is build is located in
+  [/build-resource-using-go](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-go)
+  (In development)
+* The bash build is located in
+  [/build-resource-using-bash](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-bash)
 
 ### CHECK
 
-CHECK will mimic getting the list of versions from a resource.
+[check](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/check)
+will get a list of versions from a resource.
 
 CHECK stdin,
 
@@ -60,7 +64,7 @@ CHECK stdin,
     "password": "mypassword"
   },
   "version": {
-    "ref": "123 ",
+    "ref": "123",
   }
 }
 ```
@@ -73,7 +77,7 @@ CHECK stdout,
 [
   { "ref": "123" },
   { "ref": "3de" },
-  { "ref": "456" }
+  { "ref": "456" },
   { "ref": "777" }
 ]
 ```
@@ -84,7 +88,8 @@ The last number 777 will become the current ref version that will be used by IN.
 
 ### IN
 
-IN will mimic **fetching a resource** and placing a file in the working directory.
+[in](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/in)
+will mimic **fetching a resource** and placing a file in the working directory.
 
 IN Parameters,
 
@@ -125,7 +130,8 @@ in the working directory:
 
 ### OUT
 
-OUT will mimic **updating a resource**.
+[out](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/out)
+will mimic **updating a resource**.
 
 OUT Parameters,
 
@@ -166,7 +172,7 @@ Where 777 is the version you wanted to update.
 
 ## BUILD AND PUSH THE RESOURCE
 
-I am only using bash to build the resource. go is still in development.
+I am using bash to build the resource. go is still in development.
 
 To
 [build.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/build.sh)
@@ -177,8 +183,10 @@ the resource docker image using the
 
 ```bash
 cd build-resource-using-bash/build
-build-resource.sh
+sh build-resource.sh
 ```
+
+Note how a concourse base image is used to build the resource.
 
 To
 [push.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/push/push.sh)
@@ -186,18 +194,17 @@ the resource docker image to dockerhub,
 
 ```bash
 cd build-resource-using-bash/push
-push.sh
+sh push.sh
 ```
 
 ## TEST THIS RESOURCE
 
-The directory `/test-this-resource` has an example of how to use this resource.
-
-To [set-pipeline.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-this-resource/set-pipeline.sh),
+To [set-pipeline.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-this-resource/set-pipeline.sh)
+for concourse,
 
 ```bash
 cd test-this-resource
-set-pipeline.sh.
+sh set-pipeline.sh.
 ```
 
 Where the
