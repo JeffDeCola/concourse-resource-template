@@ -182,30 +182,46 @@ sh set-pipeline.sh.
 Where the
 [pipeline.yml](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-resource/pipeline.yml),
 
-```yaml
+```yml
+#------------------------------------------------------------------------------------------
 jobs:
-...
-- name: your-job-name
-  plan:
-    ...
-    - put: concourse-resource-template
-      params: 
-        param1: "hello jeff"
-        param2: "How are you?"
 
+#**********************************************
+- name: job-test-concourse-resource-template
+#**********************************************
+  plan:
+    # CONCOURSE RESOURCE TEMPLATE
+    - get: concourse-resource-template-test
+      trigger: true
+
+    # RUN TASK IN REPO USING ALPINE DOCKER IMAGE
+    - task: task-test-concourse-resource-template
+      file: concourse-resource-template/test-resource/tasks/task-test-concourse-resource-template.yml
+
+      # TASK SUCCESS
+      on_success:
+        do:
+          # CONCOURSE RESOURCE TEMPLATE
+          - put: concourse-resource-template-test
+            params:
+              param1: "Hello jeff"
+              param2: "How are you?"    
+
+#------------------------------------------------------------------------------------------
 resource_types:
-  ...
+
   - name: jeffs-resource
     type: docker-image
     source:
-    repository: jeffdecola/resource-template
-    tag: latest
+      repository: jeffdecola/concourse-resource-template
+      tag: latest
 
+#------------------------------------------------------------------------------------------
 resources:
-  ...
-  - name: resource-template
+
+  - name: concourse-resource-template-test
     type: jeffs-resource
     source:
-      source1: foo1
-      source2: foo2
+      source1: "This is the info for source 1"
+      source2: "This is the info for source 2"
 ```
