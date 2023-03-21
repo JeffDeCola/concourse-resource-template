@@ -1,8 +1,26 @@
 # CONCOURSE
 .credentials.yml
 
+# VSCODE
+.vscode/
+
 # GO
 coverage.out
 
 # macOS
 .DS_Store
+
+# WINDOWS
+*.jpg:Zone.Identifier
+
+# Ignore binaries
+**/bin/concourse-resource-template
+
+# Ignore test coverage
+**/test/test_coverage.txt
+
+# Ignore binary used for docker build
+**/build/concourse-resource-template
+
+# SFTP VS CODE EXTENTION
+sftp.json

@@ -5,7 +5,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/JeffDeCola/concourse-resource-template)](https://goreportcard.com/report/github.com/JeffDeCola/concourse-resource-template)
 [![codeclimate Maintainability](https://api.codeclimate.com/v1/badges/5abc7e41bcf4e122e7f7/maintainability)](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/maintainability)
 [![codeclimate Issue Count](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/issues)
-[![Docker Pulls](https://badgen.net/docker/pulls/jeffdecola/concourse-resource-template?icon=docker&label=pulls)](https://hub.docker.com/r/jeffdecola/crypto-wallet-status/)
+[![Docker Pulls](https://badgen.net/docker/pulls/jeffdecola/concourse-resource-template?icon=docker&label=pulls)](https://hub.docker.com/r/jeffdecola/concourse-resource-template/)
 [![MIT License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 [![jeffdecola.com](https://img.shields.io/badge/website-jeffdecola.com-blue)](https://jeffdecola.com)
 
@@ -13,7 +13,16 @@ _Used as a template for developing a Concourse resource type._
 
 Table of Contents
 
-* tbd
+* [USE EITHER BASH SCRIPT OR GO](https://github.com/JeffDeCola/concourse-resource-template#use-either-bash-script-or-go)
+  * [USING BASH](https://github.com/JeffDeCola/concourse-resource-template#using-bash)
+  * [USING GO (default)](https://github.com/JeffDeCola/concourse-resource-template#using-go-default)
+* [SOURCE CONFIGURATION](https://github.com/JeffDeCola/concourse-resource-template#source-configuration)
+* [BEHAVIOR](https://github.com/JeffDeCola/concourse-resource-template#behavior)
+  * [CHECK (a resource version(s))](https://github.com/JeffDeCola/concourse-resource-template#check-a-resource-versions)
+  * [IN (fetch a resource)](https://github.com/JeffDeCola/concourse-resource-template#in-fetch-a-resource)
+  * [OUT (update a resource)](https://github.com/JeffDeCola/concourse-resource-template#out-update-a-resource)
+* [PIPELINE EXAMPLE USING PUT](https://github.com/JeffDeCola/concourse-resource-template#pipeline-example-using-put)
+* [TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE](https://github.com/JeffDeCola/concourse-resource-template#tested-built--pushed-to-dockerhub-using-concourse)
 
 Documentation and Reference
 
@@ -30,11 +39,11 @@ This resource type can use either bash script or go.
 
 Change _ci/Dockerfile_ to either ADD _/assets-go_ or _/assets-bash_.
 
-### USING BASH
+### USING BASH (default)
 
 The 3 bash script files located in _/assets-bash_.
 
-### USING GO (default)
+### USING GO
 
 The 3 bash scripts are located in _/assets-go_ that run _main.go_ with
 the second argument being _check_, _in_ or _out_ respectively.
@@ -210,60 +219,26 @@ jobs:
 - name: your-job-name
   plan:
     ...
-  - put: resource-template
-    params: { param1: "hello jeff", param2: "How are you?" }
+    - put: concourse-resource-template
+      params: 
+        param1: "hello jeff"
+        param2: "How are you?"
 
 resource_types:
   ...
-- name: jeffs-resource
-  type: docker-image
-  source:
-   repository: jeffdecola/resource-template
-   tag: latest
+  - name: jeffs-resource
+    type: docker-image
+    source:
+    repository: jeffdecola/resource-template
+    tag: latest
 
 resources:
   ...
-- name: resource-template
-  type: jeffs-resource
-  source:
-    source1: foo1
-    source1: foo2
+  - name: resource-template
+    type: jeffs-resource
+    source:
+      source1: foo1
+      source2: foo2
 ```
 
-GET would look similiar.
-
-
-
-
-## TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE
-
-To automate the creation of the `resource-template` docker image, a concourse pipeline
-will,
-
-* Update README.md for resource-template github webpage.
-* Unit Test the code.
-* Build the docker image `resource-template` and push to DockerHub.
-
-![IMAGE - resource-template concourse ci pipeline - IMAGE](docs/pics/resource-template-pipeline.jpg)
-
-As seen in the pipeline diagram, the _resource-dump-to-dockerhub_ uses
-the resource type
-[docker-image](https://github.com/concourse/docker-image-resource)
-to push a docker image to dockerhub.
-
-`resource-template` also contains a few extra concourse resources:
-
-* A resource (_resource-slack-alert_) uses a [docker image](https://hub.docker.com/r/cfcommunity/slack-notification-resource)
-  that will notify slack on your progress.
-* A resource (_resource-repo-status_) use a [docker image](https://hub.docker.com/r/dpb587/github-status-resource)
-  that will update your git status for that particular commit.
-* A resource ([_`resource-template`_](https://github.com/JeffDeCola/resource-template))
-  that can be used as a starting point and template for creating other concourse
-  ci resources.
-
-For more information on using concourse for continuous integration,
-refer to my cheat sheet on [concourse](https://github.com/JeffDeCola/my-cheat-sheets/tree/master/software/operations-tools/continuous-integration-continuous-deployment/concourse-cheat-sheet).
-
-TEST IT
-
-This is located under ci-test
+GET would look similar.
