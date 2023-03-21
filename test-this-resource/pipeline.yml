@@ -7,13 +7,18 @@ jobs:
 - name: job-test-concourse-resource-template
 #**********************************************
   plan:
+
+    # GET REPO FROM GITHUB
+    - get: concourse-resource-template
+      trigger: true
+
     # CONCOURSE RESOURCE TEMPLATE
     - get: concourse-resource-template-test
       trigger: true
 
     # RUN TASK IN REPO USING ALPINE DOCKER IMAGE
     - task: task-test-concourse-resource-template
-      file: concourse-resource-template/test-resource/tasks/task-test-concourse-resource-template.yml
+      file: concourse-resource-template/test-this-resource/tasks/task-test-concourse-resource-template.yml
 
       # TASK SUCCESS
       on_success:
@@ -36,6 +41,15 @@ resource_types:
 #------------------------------------------------------------------------------------------
 resources:
 
+  - name: concourse-resource-template
+    type: git
+    icon: github
+    source:
+      #uri: https://github.com/jeffdecola/concourse-resource-template
+      uri: git@github.com:jeffdecola/concourse-resource-template.git
+      branch: master
+      private_key: ((git_private_key))
+      
   - name: concourse-resource-template-test
     type: jeffs-resource
     source:
