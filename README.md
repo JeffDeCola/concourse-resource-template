@@ -1,9 +1,6 @@
 # CONCOURSE RESOURCE TEMPLATE
 
 [![Tag Latest](https://img.shields.io/github/v/tag/jeffdecola/concourse-resource-template)](https://github.com/JeffDeCola/concourse-resource-template/tags)
-[![Go Reference](https://pkg.go.dev/badge/github.com/JeffDeCola/concourse-resource-template.svg)](https://pkg.go.dev/github.com/JeffDeCola/concourse-resource-template)
-[![Go Report Card](https://goreportcard.com/badge/github.com/JeffDeCola/concourse-resource-template)](https://goreportcard.com/report/github.com/JeffDeCola/concourse-resource-template)
-[![codeclimate Maintainability](https://api.codeclimate.com/v1/badges/5abc7e41bcf4e122e7f7/maintainability)](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/maintainability)
 [![codeclimate Issue Count](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/issues)
 [![Docker Pulls](https://badgen.net/docker/pulls/jeffdecola/concourse-resource-template?icon=docker&label=pulls)](https://hub.docker.com/r/jeffdecola/concourse-resource-template/)
 [![MIT License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
@@ -35,12 +32,12 @@ A concourse resource is a docker image.
 
 It requires 3 kinds of scripts or executables,
 
-* **check** - Detecting new versions of the resource (i.e. git version)
+* **check** - Detecting new versions of the resource (e.g. git version)
 * **in** - Fetching something
 * **out** - Updating something
 
-You build your Resource Docker Image with a Dockerfile by using the
-`concourse docker base image` and adding your executables to `/opt/resource`.
+You build your resource with a Dockerfile by using the
+`concourse docker base image` and adding your scripts/executables to `/opt/resource`.
 
 The three scripts/executables can be written with bash or go,
 
@@ -172,11 +169,11 @@ Where 777 is the version you wanted to update.
 
 ## BUILD AND PUSH THE RESOURCE
 
-I am using bash to build the resource. go is still in development.
+I am using bash shell scripts to build the resource docker image. Using go is still in development.
 
 To
 [build.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/build.sh)
-the resource docker image using the
+using the
 [Dockerfile](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/Dockerfile),
 
 ```bash
@@ -197,6 +194,8 @@ sh push.sh
 
 ## TEST THIS RESOURCE
 
+Now we can test the resource in a concourse pipeline.
+
 To [set-pipeline.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-this-resource/set-pipeline.sh)
 for concourse,
 
@@ -206,7 +205,7 @@ sh set-pipeline.sh.
 ```
 
 Where the
-[pipeline.yml](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-resource/pipeline.yml),
+[pipeline.yml](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-this-resource/pipeline.yml),
 
 ```yml
 #------------------------------------------------------------------------------------------
