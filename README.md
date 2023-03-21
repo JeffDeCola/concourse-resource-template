@@ -9,20 +9,16 @@
 [![MIT License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
 [![jeffdecola.com](https://img.shields.io/badge/website-jeffdecola.com-blue)](https://jeffdecola.com)
 
-_Used as a template for developing a Concourse resource type._
+_Can be used as a template for developing a concourse resource._
 
 Table of Contents
 
-* [USE EITHER BASH SCRIPT OR GO](https://github.com/JeffDeCola/concourse-resource-template#use-either-bash-script-or-go)
-  * [USING BASH](https://github.com/JeffDeCola/concourse-resource-template#using-bash)
-  * [USING GO (default)](https://github.com/JeffDeCola/concourse-resource-template#using-go-default)
-* [SOURCE CONFIGURATION](https://github.com/JeffDeCola/concourse-resource-template#source-configuration)
-* [BEHAVIOR](https://github.com/JeffDeCola/concourse-resource-template#behavior)
-  * [CHECK (a resource version(s))](https://github.com/JeffDeCola/concourse-resource-template#check-a-resource-versions)
-  * [IN (fetch a resource)](https://github.com/JeffDeCola/concourse-resource-template#in-fetch-a-resource)
-  * [OUT (update a resource)](https://github.com/JeffDeCola/concourse-resource-template#out-update-a-resource)
-* [PIPELINE EXAMPLE USING PUT](https://github.com/JeffDeCola/concourse-resource-template#pipeline-example-using-put)
-* [TESTED, BUILT & PUSHED TO DOCKERHUB USING CONCOURSE](https://github.com/JeffDeCola/concourse-resource-template#tested-built--pushed-to-dockerhub-using-concourse)
+* [OVERVIEW](https://github.com/JeffDeCola/concourse-resource-template#overview)
+  * [CHECK](https://github.com/JeffDeCola/concourse-resource-template#check)
+  * [IN](https://github.com/JeffDeCola/concourse-resource-template#in)
+  * [OUT](https://github.com/JeffDeCola/concourse-resource-template#out)
+* [BUILD AND PUSH THE RESOURCE](https://github.com/JeffDeCola/concourse-resource-template#build-and-push-the-resource)
+* [TEST THIS RESOURCE](https://github.com/JeffDeCola/concourse-resource-template#test-this-resource)
 
 Documentation and Reference
 
@@ -33,44 +29,35 @@ Documentation and Reference
   _built with
   [concourse](https://github.com/JeffDeCola/concourse-resource-template/blob/master/ci-README.md)_
 
-## USE EITHER BASH SCRIPT OR GO
+## OVERVIEW
 
-This resource type can use either bash script or go.
+A concourse resource is a docker image.
 
-Change _ci/Dockerfile_ to either ADD _/assets-go_ or _/assets-bash_.
+It requires 3 kinds of scripts or executables,
 
-### USING BASH (default)
+* **check** - Detecting new versions of the resource (i.e. git version)
+* **in** - Fetching something
+* **out** - Updating something
 
-The 3 bash script files located in _/assets-bash_.
+You build your Resource Docker Image with a Dockerfile by using the
+`concourse docker base image` and adding your executables to `/opt/resource`.
 
-### USING GO
+The three scripts/executables can be written with bash or go,
 
-The 3 bash scripts are located in _/assets-go_ that run _main.go_ with
-the second argument being _check_, _in_ or _out_ respectively.
-Hence only one file _main.go_ need to be maintained, rather
-than three separate files.
+* The go is build is located in /build-resource-using-go
+* The bash build is located in /build-resource-using-bash
 
-## SOURCE CONFIGURATION
-
-These are just placeholders that you can update where your source is.
-
-* `source1`: Just a placeholder.
-
-* `source2`: Just a placeholder.
-
-## BEHAVIOR
-
-### CHECK (a resource version(s))
+### CHECK
 
 CHECK will mimic getting the list of versions from a resource.
 
-#### CHECK stdin
+CHECK stdin,
 
 ```json
 {
   "source": {
-    "source1": "sourcefoo1",
-    "source2": "sourcefoo2"
+    "user": "username",
+    "password": "mypassword"
   },
   "version": {
     "ref": "123 ",
@@ -80,7 +67,7 @@ CHECK will mimic getting the list of versions from a resource.
 
 123 is the current version.
 
-#### CHECK stdout
+CHECK stdout,
 
 ```json
 [
@@ -95,27 +82,16 @@ CHECK will mimic getting the list of versions from a resource.
 
 The last number 777 will become the current ref version that will be used by IN.
 
-#### CHECK - go run
+### IN
 
-```bash
-echo '{
-"params": {"param1": "Hello Clif","param2": "Nice to meet you"},
-"source": {"source1": "sourcefoo1","source2": "sourcefoo2"},
-"version":{"ref": "123"}}' |
-go run main.go check $PWD
-```
+IN will mimic **fetching a resource** and placing a file in the working directory.
 
-### IN (fetch a resource)
-
-IN will mimic fetching a resource and placing a file in the working directory.
-
-#### IN Parameters
+IN Parameters,
 
 * `param1`: Just a placeholder.
-
 * `param2`: Just a placeholder.
 
-#### IN stdin
+IN stdin,
 
 ```json
 {
@@ -132,7 +108,7 @@ IN will mimic fetching a resource and placing a file in the working directory.
   }
 ```
 
-#### IN stdout
+IN stdout,
 
 ```json
 {
@@ -144,32 +120,19 @@ IN will mimic fetching a resource and placing a file in the working directory.
 }
 ```
 
-#### file fetched (fetch.json)
-
 The IN will mimic a fetch and place a fake file `fetched.json` file
 in the working directory:
 
-#### IN - go run
+### OUT
 
-```bash
-echo '{
-"params": {"param1": "Hello Clif","param2": "Nice to meet you"},
-"source": {"source1": "sourcefoo1","source2": "sourcefoo2"},
-"version":{"ref": "777"}}' |
-go run main.go in $PWD
-```
+OUT will mimic **updating a resource**.
 
-### OUT (update a resource)
-
-OUT will mimic updating a resource.
-
-#### OUT Parameters
+OUT Parameters,
 
 * `param1`: Just a placeholder.
-
 * `param2`: Just a placeholder
 
-#### OUT stdin
+OUT stdin,
 
 ```json
 {
@@ -187,7 +150,7 @@ OUT will mimic updating a resource.
 }
 ```
 
-#### OUT stdout
+OUT stdout,
 
 ```json
 {
@@ -199,19 +162,46 @@ OUT will mimic updating a resource.
 }
 ```
 
-where 777 is the version you wanted to update.
+Where 777 is the version you wanted to update.
 
-#### OUT - go run
+## BUILD AND PUSH THE RESOURCE
+
+I am only using bash to build the resource. go is still in development.
+
+To
+[build.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/build.sh)
+the resource docker image using the
+[Dockerfile](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/Dockerfile),
 
 ```bash
-echo '{
-"params": {"param1": "Hello Jeff","param2": "How are you?"},
-"source": {"source1": "sourcefoo1","source2": "sourcefoo2"},
-"version":{"ref": ""}}' |
-go run main.go out $PWD
+
+```bash
+cd build-resource-using-bash/build
+build-resource.sh
 ```
 
-## PIPELINE EXAMPLE USING PUT
+To
+[push.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/push/push.sh)
+the resource docker image to dockerhub,
+
+```bash
+cd build-resource-using-bash/push
+push.sh
+```
+
+## TEST THIS RESOURCE
+
+The directory `/test-this-resource` has an example of how to use this resource.
+
+To [set-pipeline.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-this-resource/set-pipeline.sh),
+
+```bash
+cd test-this-resource
+set-pipeline.sh.
+```
+
+Where the
+[pipeline.yml](https://github.com/JeffDeCola/concourse-resource-template/blob/master/test-resource/pipeline.yml),
 
 ```yaml
 jobs:
@@ -240,5 +230,3 @@ resources:
       source1: foo1
       source2: foo2
 ```
-
-GET would look similar.
