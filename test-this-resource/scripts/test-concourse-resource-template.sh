@@ -20,7 +20,8 @@ fi
 echo "GOAL ----------------------------------------------------------------------------------"
 echo " "
 
-echo "?????"
+echo "You used your resoruce to get seomthing"
+echo "Not open the fetch.json file you put here"
 echo " "
 
 echo "CHECK THINGS --------------------------------------------------------------------------"
@@ -28,7 +29,7 @@ echo " "
 
 echo "At start, you should be in a /tmp/build/xxxxx directory with two folders:"
 echo "   /concourse-resource-template"
-echo "   /concourse-resource-template-updated (created in task-build-push.yml task file)"
+# echo "   /concourse-resource-template-updated (created in task-build-push.yml task file)"
 echo " "
 
 echo "pwd is: $PWD"
@@ -40,6 +41,17 @@ echo " "
 
 echo "DO SOMETHING -------------------------------------------------------------------------"
 echo " "
+
+# CD WORKING DIRECTORY
+WORKING_DIR=$1
+echo "WORKING_DIR = $WORKING_DIR"
+cd "$WORKING_DIR"
+echo "pwd is"
+pwd 
+echo ""
+echo "ls directory"
+ls -lat 
+echo ""
 
 echo "test-concourse-resource-template.sh (END)"
 echo " "

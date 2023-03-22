@@ -44,20 +44,20 @@ echo ""
 # -M = Monochrome output
 # -S = Sort order
 # . =  get everything
-jq -M -S . <&0 | tee /tmp/input.json >/dev/null    # tee redirects to a file.
+jq -M -S . <&0 | tee get_input.json >/dev/null    # tee redirects to a file.
 
 echo "json stdin is:"
-cat /tmp/input.json
+cat get_input.json
 echo ""
 
-# PARSE THE JSON FILE /tmp/input.json 
-source1=$(jq -r .source.source1 < /tmp/input.json)
-source2=$(jq -r .source.source2 < /tmp/input.json)
-source3=$(jq -r .source.source3 < /tmp/input.json)
-param1=$(jq -r .params.param1 < /tmp/input.json)
-param2=$(jq -r .params.param2 < /tmp/input.json)
-param3=$(jq -r .params.param3 < /tmp/input.json)
-ref=$(jq -r .version.ref < /tmp/input.json)
+# PARSE THE JSON FILE get_input.json 
+source1=$(jq -r .source.source1 < get_input.json)
+source2=$(jq -r .source.source2 < get_input.json)
+source3=$(jq -r .source.source3 < get_input.json)
+param1=$(jq -r .params.param1 < get_input.json)
+param2=$(jq -r .params.param2 < get_input.json)
+param3=$(jq -r .params.param3 < get_input.json)
+ref=$(jq -r .version.ref < get_input.json)
 
 # PRINT OUT THE INPUT
 echo "source are:"
@@ -85,25 +85,25 @@ echo "Mimic a fetch and place a fetched.json file in the working dir that contai
 echo ""
 
 # MIMIC FETCH - CREATE A JSON FILE
-json_file='{
+json_get_fetch='{
     "version": { 
         "ref": "'$ref'" 
     },
-    "author": "Jeff DeCola".
-    "author_date": "March 2023",
+    "author": "Jeff DeCola",
+    "author_date": "March 2023"
 }'
-jq -n "$json_file" > fetch.json
+jq -n "$json_get_fetch" > get_fetch.json
 
-echo "cat fetch.json"
-cat fetch.json
+echo "cat get_fetch.json"
+cat get_fetch.json
 echo ""
 
-# PARSE THE JSON FILE fetch.json 
-ver=$(jq -r .version.ref < fetch.json)
-author=$(jq -r .author < fetch.json)
-author_date=$(jq -r .author_date < fetch.json)
+# PARSE THE JSON FILE get_fetch.json 
+ver=$(jq -r .version.ref < get_fetch.json)
+author=$(jq -r .author < get_fetch.json)
+author_date=$(jq -r .author_date < get_fetch.json)
 
-# PRINT OUT THE INPUT
+# PRINT OUT THE FETCH
 echo " version      $ver"
 echo " author       $author"
 echo " autho_date   $author_date"
@@ -117,15 +117,16 @@ echo "DO SOMETHING *************************************************************
 echo "You have the source, params and fectched what you needed"
 echo ""
 
-# DO SOMETHING
-echo "Do something..."
-echo ""
+# PLACE STUFF IN THIS DIRECTORY
+echo "mkdir got-from-the-resource"
+mkdir got-from-the-resource
+mv get_fetch.json got-from-the-resource
 
 echo "OUTPUT ****************************************************************************************"
 echo ""
 
 # CREATE OUTPUT
-json_output='{
+json_get_output='{
     "version":{ "ref": "'$ref'" },
     "metadata": [
         { "name": "author", "value": "'$author'" },
@@ -134,12 +135,16 @@ json_output='{
         { "name": "ref", "value": "'$ref'" }
     ]
 }'
+jq -n "$json_get_output" > get_output.json
 
-# PRINT OUT THE OUTPUT
-echo ".json output is"
-echo "$json_output"
-echo " "
+echo "json stdout is:"
+cat get_output.json
+echo ""
+
+echo "ls directory"
+ls -lat 
+echo ""
 
 # OUTPUT JSON TO STDOUT
 # -n don't read any input at all.  Construct froms scratch.
-jq -n "$json_output" >&3
+jq -n "$json_get_output" >&3
