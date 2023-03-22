@@ -200,6 +200,7 @@ docker images jeffdecola/concourse-resource-template
 docker run --name concourse-resource-template -dit jeffdecola/concourse-resource-template
 docker exec -i -t concourse-resource-template /bin/bash
 cd /opt/resource
+tree
 docker logs concourse-resource-template
 docker rm -f concourse-resource-template
 ```
@@ -282,4 +283,4 @@ resources:
 ```
 
 Note: You will need to put your `((git_private_key))` in a .credentials
-file in the root of this repo to get this repo.
+file in the root of this repo.
