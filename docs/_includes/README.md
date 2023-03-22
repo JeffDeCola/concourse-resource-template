@@ -14,26 +14,31 @@ It requires 3 kinds of scripts or executables,
 You build your resource with a Dockerfile by using the
 `concourse docker base image` and adding your scripts/executables to `/opt/resource`.
 
-The three scripts/executables can be written with bash or go,
+The three scripts/executables can be written with bash, go, etc.
 
-* The go is build is located in
+* My go is build is located in
   [/build-resource-using-go](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-go)
-  (In development)
-* The bash build is located in
+  _(In development)_
+* My bash build is located in
   [/build-resource-using-bash](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-bash)
 
+---
+
 ### CHECK
+
+The check is performed before anything can use the resource. It is used to
+determine if the resource has changed.
 
 [check](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/check)
 will mimic a list of versions from a resource.
 
-CHECK stdin,
+CHECK stdin format,
 
 ```json
 {
   "source": {
-    "user": "username",
-    "password": "mypassword"
+    "source1": "username",
+    "source2": "mypassword"
   },
   "version": {
     "ref": "123",
@@ -58,47 +63,64 @@ CHECK stdout,
 
 The last number 777 will become the current ref version that will be used by IN.
 
+---
+
 ### IN
 
+The
 [in](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/in)
-will mimic **fetching a resource** and placing a file in the working directory.
+is performed after a check has confirmed there is something there.
+For my resource,
+[in](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/in)
+will mimic **fetching a resource** and place a file in the working directory.
 
-IN Parameters,
+#### PART 1 - input
 
-* `param1`: Just a placeholder.
-* `param2`: Just a placeholder.
-
-IN stdin,
+Concourse will send **stdin** for you to parse, where the source
+and params come from the pipeline and the version comes from the check.
 
 ```json
 {
   "params": {
-    "param1": "Hello Jeff",
-    "param2": "Nice to meet you"
+    "param1": "get param1",
+    "param2": "get param2",
+    "param3": "get param3"
   },
   "source": {
-    "source1": "sourcefoo1",
-    "source2": "sourcefoo2"
+    "source1": "source1 info",
+    "source2": "source2 info",
+    "source3": "source3 info"
   },
   "version": {
-    "ref": "777",
+    "ref": "786"
   }
+}
 ```
 
-IN stdout,
+#### PART 2 - Get Something
+
+In this example, I will mimic a fetch and place a file in the
+working directory.
+
+#### PART 3 - Output
+
+You send **stdout** that will be used in the next step in the pipeline.
 
 ```json
 {
-  "version":{ "ref": "777" },
+  "version": {
+    "ref": "786"
+  },
   "metadata": [
-    { "name": "nameofmonkey", "value": "Larry" },
-    { "name": "author","value": "Jeff DeCola" }
+    { "name": "author", "value": "Jeff DeCola"},
+    { "name": "author_date", "value": "March 2023"},
+    { "name": "executable", "value": "in"},
+    { "name": "ref", "value": "786" }
   ]
 }
 ```
 
-The IN will mimic a fetch and place a fake file `fetched.json` file
-in the working directory:
+---
 
 ### OUT
 
