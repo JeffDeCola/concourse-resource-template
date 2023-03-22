@@ -10,7 +10,7 @@ exec 3>&1           # Make stdout available as fd 3 for the result
 exec 1>&2           # Redirect all output to stderr for logging
 
 # WHAT IS THIS?
-echo "IN (FETCH THE RESOURCE)"
+echo "IN - GET"
 echo ""
 
 # CURRENT DIRECTORY
@@ -37,7 +37,8 @@ echo "tree - Not sure there is anything to show here."
 tree
 echo ""
 
-echo "INPUT *****************************************************************************************"
+echo "PART 1 - INPUT ********************************************************************************"
+echo "parse stdin"
 echo ""
 
 # READ stdin (which is json paramter) TO A FILE
@@ -80,8 +81,9 @@ echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
 echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
 echo ""
 
-echo "IN (FETCH THE RESOURCE) ***********************************************************************"
-echo "Mimic a fetch and place a fetched.json file in the working dir that contains the following."
+echo "PART 2 - GET SOMETHING ************************************************************************"
+echo "Mimic a fetch and place a fetched.json file in the working directory"
+echo "You have the source, params and fectched what you needed"
 echo ""
 
 # MIMIC FETCH - CREATE A JSON FILE
@@ -113,11 +115,9 @@ echo "ls directory"
 ls -lat 
 echo ""
 
-echo "DO SOMETHING **********************************************************************************"
-echo "You have the source, params and fectched what you needed"
-echo ""
-
-# PLACE STUFF IN THIS DIRECTORY
+# FOR FUN - PLACE STUFF IN A DIRECTORY
+# You can use this later in the pipeline
+# Make sure your task notes this as an input
 echo "mkdir got-from-the-resource"
 mkdir got-from-the-resource
 echo "mv get_fetch.json got-from-the-resource"
@@ -128,7 +128,8 @@ echo "ls directory"
 ls -lat
 echo ""
 
-echo "OUTPUT ****************************************************************************************"
+echo "PART 3 - OUTPUT *******************************************************************************"
+echo "send stdout"
 echo ""
 
 # CREATE OUTPUT

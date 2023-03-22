@@ -39,15 +39,20 @@ It requires 3 kinds of scripts or executables,
 You build your resource with a Dockerfile by using the
 `concourse docker base image` and adding your scripts/executables to `/opt/resource`.
 
-The three scripts/executables can be written with bash or go,
+The three scripts/executables can be written with bash, go, etc.
 
-* The go is build is located in
+* My go is build is located in
   [/build-resource-using-go](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-go)
-  (In development)
-* The bash build is located in
+  _(In development)_
+* My bash build is located in
   [/build-resource-using-bash](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-bash)
 
+---
+
 ### CHECK
+
+The check is performed before anything can use the resource. It is used to
+determine if the resource has changed.
 
 [check](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/check)
 will mimic a list of versions from a resource.
@@ -83,12 +88,21 @@ CHECK stdout,
 
 The last number 777 will become the current ref version that will be used by IN.
 
+---
+
 ### IN
 
+The
 [in](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/in)
-will mimic **fetching a resource** and placing a file in the working directory.
+is performed after a check has confirmed there is something there.
+For my resource,
+[in](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/in)
+will mimic **fetching a resource** and place a file in the working directory.
 
-**stdin** where the source and params come from the pipeline.
+#### PART 1 - input
+
+Concourse will send **stdin** for you to parse, where the source
+and params come from the pipeline and the version comes from the check.
 
 ```json
 {
@@ -108,10 +122,14 @@ will mimic **fetching a resource** and placing a file in the working directory.
 }
 ```
 
-This template will mimic a fetch and place a fake file `fetched.json` file
-in the working directory.
+#### PART 2 - Get Something
 
-**stdout** where this info comes from the fetch,
+In this example, I will mimic a fetch and place a file in the
+working directory.
+
+#### PART 3 - Output
+
+You send **stdout** that will be used in the next step in the pipeline.
 
 ```json
 {
@@ -126,6 +144,8 @@ in the working directory.
   ]
 }
 ```
+
+---
 
 ### OUT
 
