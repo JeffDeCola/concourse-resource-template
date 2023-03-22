@@ -3,9 +3,9 @@
 
 # NOTE: YOU CAN REMOVE ALL THESE ECHO'S.  I FIND THEM HELPFUL
 
-set -e              # Willexit immediate if command exits with non-zero status
+set -e              # Will exit immediate if command exits with non-zero status
 set -u              # Will print message if variable not set,
-#set -x             # Prints the shell commands +
+# set -x            # Prints the shell commands +
 set -o pipefail     # Fail on a pipline like cmd1 | cmd2 | cmd3, rather then wait
 
 exec 3>&1           # Make stdout available as fd 3 for the result
@@ -15,10 +15,11 @@ echo "CHECK (THE RESOURCE VERSION(s))"
 echo ""
 
 #  INPUT **************************************************************************************
+
 # Read stdin (which is json paramter) to file
 # -M = Monochrome output
-# -S = Sort order, 
-# . =  get everything.
+# -S = Sort order
+# . =  get everything
 jq -M -S . <&0 | tee /tmp/input.json >/dev/null   # tee redirects to a file.
 
 echo "json stdin is:"
@@ -53,6 +54,7 @@ ver3="456"
 ver4="786"
 
 # OUTPUT **************************************************************************************
+
 json_output='[
     { "ref": "'$ver1'" },
     { "ref": "'$ver2'" },

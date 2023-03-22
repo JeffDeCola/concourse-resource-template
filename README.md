@@ -50,7 +50,7 @@ The three scripts/executables can be written with bash or go,
 ### CHECK
 
 [check](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/check)
-will get a list of versions from a resource.
+will mimic a list of versions from a resource.
 
 CHECK stdin,
 
@@ -169,7 +169,8 @@ Where 777 is the version you wanted to update.
 
 ## BUILD AND PUSH THE RESOURCE
 
-I am using bash shell scripts to build the resource docker image. Using go is still in development.
+I am using bash shell scripts to build the resource docker image.
+Using go is still in development.
 
 To
 [build.sh](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/build/build.sh)
@@ -215,13 +216,21 @@ jobs:
 - name: job-test-concourse-resource-template
 #**********************************************
   plan:
+
+    # GET REPO FROM GITHUB
+    - get: concourse-resource-template
+      trigger: true
+
     # CONCOURSE RESOURCE TEMPLATE
     - get: concourse-resource-template-test
-      trigger: true
+      params:
+        param1: "get param1"
+        param2: "get param2" 
+        param3: "get param3" 
 
     # RUN TASK IN REPO USING ALPINE DOCKER IMAGE
     - task: task-test-concourse-resource-template
-      file: concourse-resource-template/test-resource/tasks/task-test-concourse-resource-template.yml
+      file: concourse-resource-template/test-this-resource/tasks/task-test-concourse-resource-template.yml
 
       # TASK SUCCESS
       on_success:
@@ -229,8 +238,9 @@ jobs:
           # CONCOURSE RESOURCE TEMPLATE
           - put: concourse-resource-template-test
             params:
-              param1: "Hello jeff"
-              param2: "How are you?"
+              param1: "put param1"
+              param2: "put param2"    
+              param3: "put param3"    
 
 #------------------------------------------------------------------------------------------
 resource_types:
@@ -244,9 +254,21 @@ resource_types:
 #------------------------------------------------------------------------------------------
 resources:
 
+  - name: concourse-resource-template
+    type: git
+    icon: github
+    source:
+      uri: git@github.com:jeffdecola/concourse-resource-template.git
+      branch: master
+      private_key: ((git_private_key))
+      
   - name: concourse-resource-template-test
     type: jeffs-resource
     source:
-      source1: "This is the info for source 1"
-      source2: "This is the info for source 2"
+      source1: "source1 info"
+      source2: "source2 info"
+      source3: "source3 info"
 ```
+
+Note: You will need to put your `((git_private_key))` in a .credentials
+file in the root of this repo to get this repo.
