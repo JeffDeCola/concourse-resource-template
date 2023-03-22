@@ -1,5 +1,5 @@
 #!/bin/bash
-# resource-template out
+# concourse-resource-template out
 
 # NOTE: YOU CAN REMOVE ALL THESE ECHO'S.  I FIND THEM HELPFUL
 
@@ -25,9 +25,10 @@ echo ""
 cd "$WORKING_DIR"
 tree
 
-#  INPUT **************************************************************************************
+echo "INPUT *****************************************************************************************"
+echo " "
 
-# Read stdin (which is json paramter) to file
+# READ stdin (which is json paramter) TO A FILE
 # -M = Monochrome output
 # -S = Sort order
 # . =  get everything
@@ -65,13 +66,15 @@ echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
 echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
 echo " "
 
-# OUT (UPDATE THE RESOURCE) *************************************************************************
-# Mimic an out.
+echo "OUT (UPDATE THE RESOURCE) *********************************************************************"
+echo "Mimic an out."
+echo " "
 
 monkeyname="Henry"
 ref="123"
 
-# OUTPUT **************************************************************************************
+echo "OUTPUT ****************************************************************************************"
+echo " "
 
 json_output='{
     "version":{ "ref": "'$ref'" },

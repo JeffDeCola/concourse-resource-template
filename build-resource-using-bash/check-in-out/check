@@ -1,5 +1,5 @@
 #!/bin/bash
-# resource-template check
+# concourse-resource-template check
 
 # NOTE: YOU CAN REMOVE ALL THESE ECHO'S.  I FIND THEM HELPFUL
 
@@ -14,9 +14,21 @@ exec 1>&2           # Redirect all output to stderr for logging
 echo "CHECK (THE RESOURCE VERSION(s))"
 echo ""
 
-#  INPUT **************************************************************************************
+# Get the working directory from arg $1
+WORKING_DIR=$1
+echo "WORKING_DIR = $WORKING_DIR"
+echo "List whats in the working directory"
+ls -lat "$WORKING_DIR"
+echo ""
 
-# Read stdin (which is json paramter) to file
+# We added tree into the build.  Not needed, but fun to know how to do it.
+cd "$WORKING_DIR"
+tree
+
+echo "INPUT *****************************************************************************************"
+echo " "
+
+# READ stdin (which is json paramter) TO A FILE
 # -M = Monochrome output
 # -S = Sort order
 # . =  get everything
@@ -45,15 +57,17 @@ echo "List whats in top directory"
 ls -lat 
 echo ""
 
-# CHECK (THE RESOURCE VERSION(s)) *******************************************************************
-# Mimic a fetch and output the following versions for IN.
+echo "CHECK (THE RESOURCE VERSION(s)) ***************************************************************"
+echo "Mimic a fetch and output the following versions for IN."
+echo " "
 
 ver1="123"
 ver2="3de"
 ver3="456"
 ver4="786"
 
-# OUTPUT **************************************************************************************
+echo "OUTPUT ****************************************************************************************"
+echo " "
 
 json_output='[
     { "ref": "'$ver1'" },
