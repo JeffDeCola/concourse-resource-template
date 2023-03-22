@@ -39,9 +39,6 @@ echo ""
 source1=$(jq -r .source.source1 < get_input.json)
 source2=$(jq -r .source.source2 < get_input.json)
 source3=$(jq -r .source.source3 < get_input.json)
-param1=$(jq -r .params.param1 < get_input.json)
-param2=$(jq -r .params.param2 < get_input.json)
-param3=$(jq -r .params.param3 < get_input.json)
 ref=$(jq -r .version.ref < get_input.json)
 
 # PRINT OUT THE INPUT
@@ -49,20 +46,8 @@ echo "source are:"
 echo "    $source1"
 echo "    $source2"
 echo "    $source3"
-echo "params are:"
-echo "    $param1"
-echo "    $param2"
-echo "    $param3"
 echo "ref is:"
 echo "    $ref"
-echo ""
-
-# SOME METATDATA
-echo "BUILD_ID = $BUILD_ID"
-echo "BUILD_NAME = $BUILD_NAME"
-echo "BUILD_JOB_NAME = $BUILD_JOB_NAME"
-echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
-echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
 echo ""
 
 echo "PART 2 - GET SOMETHING ************************************************************************"
