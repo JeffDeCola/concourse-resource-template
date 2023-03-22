@@ -52,16 +52,27 @@ echo ""
 
 echo "PART 2 - GET SOMETHING ************************************************************************"
 echo "Mimic getting the ver from a source"
-echo "You have the source, params and ref version"
+echo "You have the source info and the ref version"
 echo ""
 
 # Here you would check the ref version and get the next version
 # I'm just going to mimic it
 
-ver1="v.0.0.1"
-ver2="v.0.0.2"
-ver3="v.0.1.0"
-ver4="v.0.1.1"
+echo "Make New Version"
+echo "ref first time is null"
+if [ "$ref" == "null" ]
+then
+      echo "ref is null - set to 0"
+      ref=0
+else
+      echo "ref is NOT null - do nothing"
+fi
+
+# ADD 1 TO VERSION
+echo "Add 1 to version"
+((ver=ref+1))
+echo "New version is $ver"
+echo ""
 
 echo "PART 3 - OUTPUT *******************************************************************************"
 echo "send stdout"
@@ -69,11 +80,17 @@ echo ""
 
 # CREATE OUTPUT
 json_check_output='[
-    { "ref": "'$ver1'" },
-    { "ref": "'$ver2'" },
-    { "ref": "'$ver3'" },
-    { "ref": "'$ver4'" }
+    { "ref": "'$ver'" }
 ]'
+jq -n "$json_check_output" > check_output.json
+
+echo "json stdout is:"
+cat check_output.json
+echo ""
+
+echo "ls directory"
+ls -lat 
+echo ""
 
 # OUTPUT JSON TO STDOUT
 # -n don't read any input at all.  Construct froms scratch.

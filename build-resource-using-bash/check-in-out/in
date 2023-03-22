@@ -115,19 +115,6 @@ echo "ls directory"
 ls -lat 
 echo ""
 
-# FOR FUN - PLACE STUFF IN A DIRECTORY
-# You can use this later in the pipeline
-# Make sure your task notes this as an input
-echo "mkdir got-from-the-resource"
-mkdir got-from-the-resource
-echo "mv get_fetch.json got-from-the-resource"
-mv get_fetch.json got-from-the-resource
-echo " "
-
-echo "ls directory"
-ls -lat
-echo ""
-
 echo "PART 3 - OUTPUT *******************************************************************************"
 echo "send stdout"
 echo ""

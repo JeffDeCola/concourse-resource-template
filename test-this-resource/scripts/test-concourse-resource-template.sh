@@ -32,12 +32,27 @@ echo "   /concourse-resource-template"
 # echo "   /concourse-resource-template-updated (created in task-build-push.yml task file)"
 echo " "
 
-echo "pwd is: $PWD"
-echo " "
+echo "pwd is"
+pwd 
+echo ""
 
-echo "List whats in the current directory"
-ls -la
-echo " "
+echo "ls directory"
+ls -lat 
+echo ""
+
+echo "PART 1 - INPUT ********************************************************************************"
+echo "parse stdin"
+echo ""
+
+# READ stdin (which is json paramter) TO A FILE
+# -M = Monochrome output
+# -S = Sort order
+# . =  get everything
+jq -M -S . <&0 | tee get_input.json >/dev/null    # tee redirects to a file.
+
+echo "json stdin is:"
+cat get_input.json
+echo ""
 
 echo "DO SOMETHING -------------------------------------------------------------------------"
 echo " "
@@ -46,6 +61,14 @@ echo "cd jeffs-test-resource"
 cd jeffs-test-resource
 echo "List whats in the current directory"
 ls -la
+echo " "
+
+echo "cat get_fetch.json"
+cat get_fetch.json
+echo " "
+
+echo "Add a file for fun"
+echo 'This is a test' > job-test-concourse-resource-templat.txt
 echo " "
 
 echo "test-concourse-resource-template.sh (END)"
