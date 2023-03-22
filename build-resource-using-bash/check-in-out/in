@@ -33,7 +33,7 @@ ls -lat
 echo ""
 
 # REMEMBER WE ADDED TREE BINARY INTO THE BUILD.
-echo "tree"
+echo "tree - Not sure there is anything to show here."
 tree
 echo ""
 
