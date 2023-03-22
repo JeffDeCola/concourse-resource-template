@@ -10,6 +10,7 @@ image_resource:
 
 inputs:
   - name: concourse-resource-template
+  - name: got-from-the-resource
 
 #outputs:
 #  - name: concourse-resource-template-updated
