@@ -13,7 +13,7 @@ jobs:
       trigger: true
 
     # CONCOURSE RESOURCE TEMPLATE
-    - get: concourse-resource-template-test
+    - get: jeffs-test-resource
       params:
         param1: "get param1"
         param2: "get param2" 
@@ -27,7 +27,7 @@ jobs:
       on_success:
         do:
           # CONCOURSE RESOURCE TEMPLATE
-          - put: concourse-resource-template-test
+          - put: jeffs-test-resource
             params:
               param1: "put param1"
               param2: "put param2"    
@@ -53,8 +53,9 @@ resources:
       branch: master
       private_key: ((git_private_key))
       
-  - name: concourse-resource-template-test
+  - name: jeffs-test-resource
     type: jeffs-resource
+    icon: 
     source:
       source1: "source1 info"
       source2: "source2 info"

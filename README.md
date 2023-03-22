@@ -52,13 +52,13 @@ The three scripts/executables can be written with bash or go,
 [check](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/check)
 will mimic a list of versions from a resource.
 
-CHECK stdin,
+CHECK stdin format,
 
 ```json
 {
   "source": {
-    "user": "username",
-    "password": "mypassword"
+    "source1": "username",
+    "source2": "mypassword"
   },
   "version": {
     "ref": "123",
@@ -88,42 +88,44 @@ The last number 777 will become the current ref version that will be used by IN.
 [in](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/in)
 will mimic **fetching a resource** and placing a file in the working directory.
 
-IN Parameters,
-
-* `param1`: Just a placeholder.
-* `param2`: Just a placeholder.
-
-IN stdin,
+**stdin** where the source and params come from the pipeline.
 
 ```json
 {
   "params": {
-    "param1": "Hello Jeff",
-    "param2": "Nice to meet you"
+    "param1": "get param1",
+    "param2": "get param2",
+    "param3": "get param3"
   },
   "source": {
-    "source1": "sourcefoo1",
-    "source2": "sourcefoo2"
+    "source1": "source1 info",
+    "source2": "source2 info",
+    "source3": "source3 info"
   },
   "version": {
-    "ref": "777",
+    "ref": "786"
   }
-```
-
-IN stdout,
-
-```json
-{
-  "version":{ "ref": "777" },
-  "metadata": [
-    { "name": "nameofmonkey", "value": "Larry" },
-    { "name": "author","value": "Jeff DeCola" }
-  ]
 }
 ```
 
-The IN will mimic a fetch and place a fake file `fetched.json` file
-in the working directory:
+This template will mimic a fetch and place a fake file `fetched.json` file
+in the working directory.
+
+**stdout** where this info comes from the fetch,
+
+```json
+{
+  "version": {
+    "ref": "786"
+  },
+  "metadata": [
+    { "name": "author", "value": "Jeff DeCola"},
+    { "name": "author_date", "value": "March 2023"},
+    { "name": "executable", "value": "in"},
+    { "name": "ref", "value": "786" }
+  ]
+}
+```
 
 ### OUT
 
