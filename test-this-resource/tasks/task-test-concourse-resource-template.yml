@@ -15,5 +15,5 @@ inputs:
 #  - name: concourse-resource-template-updated
 
 run:
-  path: ./concourse-resource-template/test-resource/scripts/test-concourse-resource-template.sh
+  path: ./concourse-resource-template/test-this-resource/scripts/test-concourse-resource-template.sh
   # args: [-debug]
