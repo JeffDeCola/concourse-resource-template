@@ -40,20 +40,6 @@ echo "ls directory"
 ls -lat 
 echo ""
 
-echo "PART 1 - INPUT ********************************************************************************"
-echo "parse stdin"
-echo ""
-
-# READ stdin (which is json paramter) TO A FILE
-# -M = Monochrome output
-# -S = Sort order
-# . =  get everything
-jq -M -S . <&0 | tee get_input.json >/dev/null    # tee redirects to a file.
-
-echo "json stdin is:"
-cat get_input.json
-echo ""
-
 echo "DO SOMETHING -------------------------------------------------------------------------"
 echo " "
 
@@ -70,6 +56,10 @@ echo " "
 echo "Add a file for fun"
 echo 'This is a test' > job-test-concourse-resource-templat.txt
 echo " "
+
+echo "ls directory"
+ls -lat 
+echo ""
 
 echo "test-concourse-resource-template.sh (END)"
 echo " "
