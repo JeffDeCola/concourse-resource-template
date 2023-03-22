@@ -120,7 +120,13 @@ echo ""
 # PLACE STUFF IN THIS DIRECTORY
 echo "mkdir got-from-the-resource"
 mkdir got-from-the-resource
+echo "mv get_fetch.json got-from-the-resource"
 mv get_fetch.json got-from-the-resource
+echo " "
+
+echo "ls directory"
+ls -lat
+echo ""
 
 echo "OUTPUT ****************************************************************************************"
 echo ""
