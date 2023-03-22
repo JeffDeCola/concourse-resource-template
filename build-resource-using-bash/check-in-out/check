@@ -58,6 +58,7 @@ echo ""
 # Here you would check the ref version and get the next version
 # I'm just going to mimic it
 
+# NOTE: THIS WILL LOOP TILL VER 5
 echo "Make New Version"
 echo "ref first time is null"
 if [ "$ref" == "null" ]
@@ -68,10 +69,18 @@ else
       echo "ref is NOT null - do nothing"
 fi
 
-# ADD 1 TO VERSION
-echo "Add 1 to version"
-((ver=ref+1))
-echo "New version is $ver"
+echo "LOOP TILL VERSION 5"
+if [ "$ref" == "4" ]
+then
+      echo "DONE INCREMENTING VERSION"
+      ref=0
+else
+      # ADD 1 TO VERSION
+      echo "Add 1 to version"
+      ((ver=ref+1))
+fi
+
+echo "The version is $ver"
 echo ""
 
 echo "PART 3 - OUTPUT *******************************************************************************"

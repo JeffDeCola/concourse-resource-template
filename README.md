@@ -65,20 +65,19 @@ and params come from the pipeline and the version comes from the check.
 ```json
 {
   "source": {
-    "source1": "username",
-    "source2": "mypassword"
+    "source1": "source1 info",
+    "source2": "source2 info",
+    "source3": "source3 info"
   },
   "version": {
-    "ref": "123",
+    "ref": "null"
   }
 }
 ```
 
-123 is the current version.
+#### PART 2 - GET Something
 
-#### PART 2 - Get Something
-
-In this example, I will mimic a getting a new version.
+In this example, I will mimic a getting a new version and increment until ver 5.
 
 #### PART 3 - Output
 
@@ -88,14 +87,11 @@ CHECK stdout,
 
 ```json
 [
-  { "ref": "123" },
-  { "ref": "3de" },
-  { "ref": "456" },
-  { "ref": "777" }
+  {
+    "ref": "1"
+  }
 ]
 ```
-
-777 is the latest version that will be used by `in`.
 
 ---
 
@@ -126,15 +122,15 @@ and params come from the pipeline and the version comes from the check.
     "source3": "source3 info"
   },
   "version": {
-    "ref": "786"
+    "ref": "1"
   }
 }
 ```
 
-#### PART 2 - Get Something
+#### PART 2 - GET Something
 
-In this example, I will mimic a fetch and place a file in the
-working directory.
+In this example, I will mimic a fetch and place a file
+`get_fetch.json` in the working directory.
 
 #### PART 3 - Output
 
@@ -143,13 +139,13 @@ You send **stdout** that will be used in the next step in the pipeline.
 ```json
 {
   "version": {
-    "ref": "786"
+    "ref": "1"
   },
   "metadata": [
     { "name": "author", "value": "Jeff DeCola"},
     { "name": "author_date", "value": "March 2023"},
     { "name": "executable", "value": "in"},
-    { "name": "ref", "value": "786" }
+    { "name": "ref", "value": "1" }
   ]
 }
 ```
@@ -158,45 +154,53 @@ You send **stdout** that will be used in the next step in the pipeline.
 
 ### OUT
 
+The
 [out](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/out)
-will mimic **updating a resource**.
+will mimic **updating a resource**
+and is performed after the task.
 
-OUT Parameters,
+#### PART 1 - input
 
-* `param1`: Just a placeholder.
-* `param2`: Just a placeholder
-
-OUT stdin,
+Concourse will send **stdin** for `in` to parse, where the source
+and params come from the pipeline and the version comes from the check.
 
 ```json
 {
   "params": {
-    "param1": "Hello Jeff",
-    "param2": "How are you?"
+    "param1": "put param1",
+    "param2": "put param2",
+    "param3": "put param3"
   },
   "source": {
-    "source1": "sourcefoo1",
-    "source2": "sourcefoo2"
-  },
-  "version": {
-    "ref": ""
+    "source1": "source1 info",
+    "source2": "source2 info",
+    "source3": "source3 info"
   }
 }
 ```
 
-OUT stdout,
+#### PART 2 - PUT Something
+
+In this example, I will mimic a push/deploy and place a file
+`put_fetch.json` in the working directory.
+
+#### PART 3 - Output
+
+You send **stdout** that will be used in the next step in the pipeline.
 
 ```json
 {
-  "version":{ "ref": "777" },
+  "version": {
+    "ref": "1"
+  },
   "metadata": [
-    { "name": "nameofmonkey","value": "Henry" },
-    { "name": "author","value": "Jeff DeCola" }
+    { "name": "author", "value": "Jeff DeCola"},
+    { "name": "author_date", "value": "March 2023"},
+    { "name": "executable", "value": "in"},
+    { "name": "ref", "value": "1" }
   ]
 }
 ```
-
-Where 777 is the version you wanted to update.
 
 ## BUILD AND PUSH THE RESOURCE
 
