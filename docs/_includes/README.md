@@ -168,6 +168,17 @@ cd build-resource-using-bash/push
 sh push.sh
 ```
 
+You can check this docker image,
+
+```bash
+docker images jeffdecola/concourse-resource-template
+docker run --name concourse-resource-template -dit jeffdecola/concourse-resource-template
+docker exec -i -t concourse-resource-template /bin/bash
+cd /opt/resource
+docker logs concourse-resource-template
+docker rm -f concourse-resource-template
+```
+
 ## TEST THIS RESOURCE
 
 Now we can test the resource in a concourse pipeline.
