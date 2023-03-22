@@ -57,7 +57,10 @@ determine if the resource has changed.
 [check](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/check)
 will mimic a list of versions from a resource.
 
-CHECK stdin format,
+#### PART 1 - input
+
+Concourse will send **stdin** for `check` to parse, where the source
+and params come from the pipeline and the version comes from the check.
 
 ```json
 {
@@ -73,6 +76,14 @@ CHECK stdin format,
 
 123 is the current version.
 
+#### PART 2 - Get Something
+
+In this example, I will mimic a getting a new version.
+
+#### PART 3 - Output
+
+You send **stdout** that will be used in the next step in the pipeline.
+
 CHECK stdout,
 
 ```json
@@ -84,9 +95,7 @@ CHECK stdout,
 ]
 ```
 
-777 is the latest version that will be used.
-
-The last number 777 will become the current ref version that will be used by IN.
+777 is the latest version that will be used by `in`.
 
 ---
 
@@ -101,7 +110,7 @@ will mimic **fetching a resource** and place a file in the working directory.
 
 #### PART 1 - input
 
-Concourse will send **stdin** for you to parse, where the source
+Concourse will send **stdin** for `in` to parse, where the source
 and params come from the pipeline and the version comes from the check.
 
 ```json
