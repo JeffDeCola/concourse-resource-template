@@ -14,17 +14,6 @@ exec 1>&2           # Redirect all output to stderr for logging
 echo "CHECK (THE RESOURCE VERSION(s))"
 echo ""
 
-# Get the working directory from arg $1
-WORKING_DIR=$1
-echo "WORKING_DIR = $WORKING_DIR"
-echo "List whats in the working directory"
-ls -lat "$WORKING_DIR"
-echo ""
-
-# We added tree into the build.  Not needed, but fun to know how to do it.
-cd "$WORKING_DIR"
-tree
-
 echo "INPUT *****************************************************************************************"
 echo " "
 

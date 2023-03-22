@@ -104,9 +104,8 @@ echo "You have the source, params and fectched what you needed"
 echo ""
 
 # DO SOMETHING
-monkeyname="Larry"
+echo "Do something"
 echo ""
-
 
 echo "OUTPUT ****************************************************************************************"
 echo ""
@@ -115,8 +114,10 @@ echo ""
 json_output='{
     "version":{ "ref": "'$ref'" },
     "metadata": [
-        { "name": "nameofmonkey", "value": "'$monkeyname'" },
         { "name": "author", "value": "Jeff DeCola" }
+        { "name": "author_date", "value": "March 2023" }
+        { "name": "executable", "value": "in" }
+        { "name": "ref", "value": "'$ref'" }
     ]
 }'
 
