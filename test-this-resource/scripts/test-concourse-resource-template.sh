@@ -42,16 +42,11 @@ echo " "
 echo "DO SOMETHING -------------------------------------------------------------------------"
 echo " "
 
-# CD WORKING DIRECTORY
-WORKING_DIR=$1
-echo "WORKING_DIR = $WORKING_DIR"
-cd "$WORKING_DIR"
-echo "pwd is"
-pwd 
-echo ""
-echo "ls directory"
-ls -lat 
-echo ""
+echo "cd jeffs-test-resource"
+cd jeffs-test-resource
+echo "List whats in the current directory"
+ls -la
+echo " "
 
 echo "test-concourse-resource-template.sh (END)"
 echo " "
