@@ -225,8 +225,8 @@ jobs:
     - get: concourse-resource-template-test
       params:
         param1: "get param1"
-        param2: "get param2" 
-        param3: "get param3" 
+        param2: "get param2"
+        param3: "get param3"
 
     # RUN TASK IN REPO USING ALPINE DOCKER IMAGE
     - task: task-test-concourse-resource-template
@@ -239,8 +239,8 @@ jobs:
           - put: concourse-resource-template-test
             params:
               param1: "put param1"
-              param2: "put param2"    
-              param3: "put param3"    
+              param2: "put param2"
+              param3: "put param3"
 
 #------------------------------------------------------------------------------------------
 resource_types:
@@ -261,7 +261,7 @@ resources:
       uri: git@github.com:jeffdecola/concourse-resource-template.git
       branch: master
       private_key: ((git_private_key))
-      
+
   - name: concourse-resource-template-test
     type: jeffs-resource
     source:

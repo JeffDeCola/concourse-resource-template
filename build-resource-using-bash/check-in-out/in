@@ -1,7 +1,5 @@
 #!/bin/bash
-# resource-template in
-
-# NOTE: YOU CAN REMOVE ALL THESE ECHO'S.  I FIND THEM HELPFUL
+# concourse-resource-template in
 
 set -e              # Will exit immediate if command exits with non-zero status
 set -u              # Will print message if variable not set,
@@ -11,23 +9,38 @@ set -o pipefail     # Fail on a pipline like cmd1 | cmd2 | cmd3, rather then wai
 exec 3>&1           # Make stdout available as fd 3 for the result
 exec 1>&2           # Redirect all output to stderr for logging
 
+# WHAT IS THIS?
 echo "IN (FETCH THE RESOURCE)"
 echo ""
 
-# Get the working directory from arg $1
-WORKING_DIR=$1
-echo "WORKING_DIR = $WORKING_DIR"
-echo "List whats in the working directory"
-ls -lat "$WORKING_DIR"
+# CURRENT DIRECTORY
+echo "pwd is"
+pwd 
+echo ""
+echo "ls directory"
+ls -lat 
 echo ""
 
-# We added tree into the build.  Not needed, but fun to know how to do it.
+# CD WORKING DIRECTORY
+WORKING_DIR=$1
+echo "WORKING_DIR = $WORKING_DIR"
 cd "$WORKING_DIR"
+echo "pwd is"
+pwd 
+echo ""
+echo "ls directory"
+ls -lat 
+echo ""
+
+# REMEMBER WE ADDED TREE BINARY INTO THE BUILD.
+echo "tree"
 tree
+echo ""
 
-#  INPUT **************************************************************************************
+echo "INPUT *****************************************************************************************"
+echo ""
 
-# Read stdin (which is json paramter) to file
+# READ stdin (which is json paramter) TO A FILE
 # -M = Monochrome output
 # -S = Sort order
 # . =  get everything
@@ -40,57 +53,65 @@ echo ""
 # PARSE THE JSON FILE /tmp/input.json 
 source1=$(jq -r .source.source1 < /tmp/input.json)
 source2=$(jq -r .source.source2 < /tmp/input.json)
+source3=$(jq -r .source.source3 < /tmp/input.json)
 param1=$(jq -r .params.param1 < /tmp/input.json)
 param2=$(jq -r .params.param2 < /tmp/input.json)
+param3=$(jq -r .params.param3 < /tmp/input.json)
 ref=$(jq -r .version.ref < /tmp/input.json)
-echo "source are"
-echo "$source1" "$source2"
-echo ""
-echo "params are"
-echo "$param1" "$param2"
-echo ""
-echo "ref is"
-echo "$ref"
+
+# PRINT OUT THE INPUT
+echo "source are:"
+echo "    $source1"
+echo "    $source2"
+echo "    $source3"
+echo "params are:"
+echo "    $param1"
+echo "    $param2"
+echo "    $param3"
+echo "ref is:"
+echo "    $ref"
 echo ""
 
-echo "pwd is"
-pwd 
-echo ""
-
-echo "List whats in top directory"
-ls -lat 
-echo ""
-
-# SOME METATDATA YOU CAN USE
+# SOME METATDATA
 echo "BUILD_ID = $BUILD_ID"
 echo "BUILD_NAME = $BUILD_NAME"
 echo "BUILD_JOB_NAME = $BUILD_JOB_NAME"
 echo "BUILD_PIPELINE_NAME = $BUILD_PIPELINE_NAME"
 echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
-echo " "
+echo ""
 
-# IN (FETCH THE RESOURCE) *************************************************************************
-# Mimic a fetch and place a fetched.json file in the working directory that contains the following.
+echo "IN (FETCH THE RESOURCE) ***********************************************************************"
+echo "Mimic a fetch and place a fetched.json file in the working dir that contains the following."
+echo ""
 
+# MIMIC FETCH - CREATE A JSON FILE
 json_file='{
   "version": { "ref": "'$ref'" },
   "metadata": { "happy": "days" }
 }'
-
 jq -n "$json_file" > fetch.json
-
-echo "List whats in the directory"
-ls -lat 
-echo ""
 
 echo "cat fetch.json"
 cat fetch.json
 echo ""
 
+echo "ls directory"
+ls -lat 
+echo ""
+
+echo "DO SOMETHING **********************************************************************************"
+echo "You have the source, params and fectched what you needed"
+echo ""
+
+# DO SOMETHING
 monkeyname="Larry"
+echo ""
 
-# OUTPUT **************************************************************************************
 
+echo "OUTPUT ****************************************************************************************"
+echo ""
+
+# CREATE OUTPUT
 json_output='{
     "version":{ "ref": "'$ref'" },
     "metadata": [
@@ -99,7 +120,11 @@ json_output='{
     ]
 }'
 
-echo ".json output is $json_output"
+# PRINT OUT THE OUTPUT
+echo ".json output is"
+echo "$json_output"
+echo " "
 
+# OUTPUT JSON TO STDOUT
 # -n don't read any input at all.  Construct froms scratch.
 jq -n "$json_output" >&3
