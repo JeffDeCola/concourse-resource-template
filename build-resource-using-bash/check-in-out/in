@@ -86,13 +86,27 @@ echo ""
 
 # MIMIC FETCH - CREATE A JSON FILE
 json_file='{
-  "version": { "ref": "'$ref'" },
-  "metadata": { "happy": "days" }
+    "version": { 
+        "ref": "'$ref'" 
+    },
+    "author": "Jeff DeCola".
+    "author_date": "March 2023",
 }'
 jq -n "$json_file" > fetch.json
 
 echo "cat fetch.json"
 cat fetch.json
+echo ""
+
+# PARSE THE JSON FILE fetch.json 
+ver=$(jq -r .version.ref < fetch.json)
+author=$(jq -r .author < fetch.json)
+author_date=$(jq -r .author_date < fetch.json)
+
+# PRINT OUT THE INPUT
+echo " version      $ver"
+echo " author       $author"
+echo " autho_date   $author_date"
 echo ""
 
 echo "ls directory"
@@ -104,7 +118,7 @@ echo "You have the source, params and fectched what you needed"
 echo ""
 
 # DO SOMETHING
-echo "Do something"
+echo "Do something..."
 echo ""
 
 echo "OUTPUT ****************************************************************************************"
@@ -114,9 +128,9 @@ echo ""
 json_output='{
     "version":{ "ref": "'$ref'" },
     "metadata": [
-        { "name": "author", "value": "Jeff DeCola" }
-        { "name": "author_date", "value": "March 2023" }
-        { "name": "executable", "value": "in" }
+        { "name": "author", "value": "'$author'" },
+        { "name": "author_date", "value": "'$author_date'" },
+        { "name": "executable", "value": "in" },
         { "name": "ref", "value": "'$ref'" }
     ]
 }'
