@@ -22,6 +22,8 @@ The three scripts/executables can be written with bash, go, etc.
 * My bash build is located in
   [/build-resource-using-bash](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-bash)
 
+![IMAGE - concourse-check-in-out-pipeline - IMAGE](pics/concourse-check-in-out-pipeline.jpg)
+
 ---
 
 ### CHECK
@@ -116,7 +118,7 @@ Input will send **stdout** that will be used in the next step in the pipeline.
     { "name": "author", "value": "Jeff DeCola"},
     { "name": "author_date", "value": "March 2023"},
     { "name": "executable", "value": "in"},
-    { "name": "ref", "value": "1" }
+    { "name": "version", "value": "1" }
   ]
 }
 ```
@@ -169,7 +171,8 @@ You send **stdout** that will be used in the next step in the pipeline.
   "metadata": [
     { "name": "author", "value": "Addie DeCola"},
     { "name": "author_date", "value": "April 2021"},
-    { "name": "executable", "value": "out"}
+    { "name": "executable", "value": "out"},
+    { "name": "version", "value": "1" }
   ]
 }
 ```
