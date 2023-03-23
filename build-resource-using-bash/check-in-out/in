@@ -58,7 +58,7 @@ source3=$(jq -r .source.source3 < get_input.json)
 param1=$(jq -r .params.param1 < get_input.json)
 param2=$(jq -r .params.param2 < get_input.json)
 param3=$(jq -r .params.param3 < get_input.json)
-ref=$(jq -r .version.ref < get_input.json)
+input_version=$(jq -r .version.ref < get_input.json)
 
 # PRINT OUT THE INPUT
 echo "source are:"
@@ -69,8 +69,8 @@ echo "params are:"
 echo "    $param1"
 echo "    $param2"
 echo "    $param3"
-echo "ref is:"
-echo "    $ref"
+echo "version is:"
+echo "    $input_version"
 echo ""
 
 # SOME METATDATA
@@ -86,10 +86,15 @@ echo "Mimic a fetch and place a fetched.json file in the working directory"
 echo "You have the source, params and fectched what you needed"
 echo ""
 
+# MIMIC - MUST GET SAME VERSION TO CHECK - THIS IS NOT PASSED
+# **************
+version=$input_version
+# **************
+
 # MIMIC FETCH - CREATE A JSON FILE
 json_get_fetch='{
     "version": { 
-        "ref": "'$ref'" 
+        "ref": "'$version'" 
     },
     "author": "Jeff DeCola",
     "author_date": "March 2023"
@@ -101,12 +106,12 @@ cat get_fetch.json
 echo ""
 
 # PARSE THE JSON FILE get_fetch.json 
-ver=$(jq -r .version.ref < get_fetch.json)
+version=$(jq -r .version.ref < get_fetch.json)
 author=$(jq -r .author < get_fetch.json)
 author_date=$(jq -r .author_date < get_fetch.json)
 
 # PRINT OUT THE FETCH
-echo " version      $ver"
+echo " version      $version"
 echo " author       $author"
 echo " autho_date   $author_date"
 echo ""
@@ -121,12 +126,12 @@ echo ""
 
 # CREATE OUTPUT
 json_get_output='{
-    "version":{ "ref": "'$ref'" },
+    "version":{ "ref": "'$version'" },
     "metadata": [
         { "name": "author", "value": "'$author'" },
         { "name": "author_date", "value": "'$author_date'" },
         { "name": "executable", "value": "in" },
-        { "name": "ref", "value": "'$ref'" }
+        { "name": "ref", "value": "'$version'" }
     ]
 }'
 jq -n "$json_get_output" > get_output.json

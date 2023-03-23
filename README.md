@@ -51,16 +51,14 @@ The three scripts/executables can be written with bash, go, etc.
 
 ### CHECK
 
-The check is performed before anything can use the resource. It is used to
-determine if the resource has changed.
-
 [check](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/check)
-will mimic a list of versions from a resource.
+is performed before anything can use the resource. It is used to
+determine if the resource has changed (checks version).
 
-#### PART 1 - input
+#### PART 1 - Input
 
 Concourse will send **stdin** for `check` to parse, where the source
-and params come from the pipeline and the version comes from the check.
+and comes from the pipeline and the version comes from the check.
 
 ```json
 {
@@ -75,15 +73,13 @@ and params come from the pipeline and the version comes from the check.
 }
 ```
 
-#### PART 2 - GET Something
+#### PART 2 - Check/Update Version
 
 In this example, I will mimic a getting a new version and increment until ver 5.
 
 #### PART 3 - Output
 
-You send **stdout** that will be used in the next step in the pipeline.
-
-CHECK stdout,
+Check will send **stdout** that will be used in the next step in the pipeline.
 
 ```json
 [
@@ -104,7 +100,7 @@ For my resource,
 [in](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/in)
 will mimic **fetching a resource** and place a file in the working directory.
 
-#### PART 1 - input
+#### PART 1 - Input
 
 Concourse will send **stdin** for `in` to parse, where the source
 and params come from the pipeline and the version comes from the check.
@@ -134,7 +130,7 @@ In this example, I will mimic a fetch and place a file
 
 #### PART 3 - Output
 
-You send **stdout** that will be used in the next step in the pipeline.
+Input will send **stdout** that will be used in the next step in the pipeline.
 
 ```json
 {
@@ -159,10 +155,10 @@ The
 will mimic **updating a resource**
 and is performed after the task.
 
-#### PART 1 - input
+#### PART 1 - Input
 
-Concourse will send **stdin** for `in` to parse, where the source
-and params come from the pipeline and the version comes from the check.
+Concourse will send **stdin** for `out` to parse, where the source
+and params come from the pipeline.
 
 ```json
 {
@@ -184,6 +180,8 @@ and params come from the pipeline and the version comes from the check.
 In this example, I will mimic a push/deploy and place a file
 `put_fetch.json` in the working directory.
 
+It is important you must recheck version here. **So you must get it.**
+
 #### PART 3 - Output
 
 You send **stdout** that will be used in the next step in the pipeline.
@@ -194,10 +192,9 @@ You send **stdout** that will be used in the next step in the pipeline.
     "ref": "1"
   },
   "metadata": [
-    { "name": "author", "value": "Jeff DeCola"},
-    { "name": "author_date", "value": "March 2023"},
-    { "name": "executable", "value": "in"},
-    { "name": "ref", "value": "1" }
+    { "name": "author", "value": "Addie DeCola"},
+    { "name": "author_date", "value": "April 2021"},
+    { "name": "executable", "value": "out"}
   ]
 }
 ```
