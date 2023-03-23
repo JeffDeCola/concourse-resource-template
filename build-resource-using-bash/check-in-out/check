@@ -62,7 +62,7 @@ echo "version first time is null"
 if [ "$input_version" == "null" ]
 then
       echo "version is null - set to 0"
-      version=0
+      input_version=0
 else
       echo "version is NOT null - do nothing"
 fi
@@ -76,7 +76,7 @@ then
 else
       # ADD 1 TO VERSION
       echo "Add 1 to version"
-      ((version=version+1))
+      ((version=input_version+1))
 fi
 
 echo "The version is $version"
