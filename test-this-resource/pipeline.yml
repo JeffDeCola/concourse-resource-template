@@ -47,7 +47,7 @@ resources:
 
   - name: concourse-resource-template
     type: git
-    icon: github
+    icon: paperclip
     source:
       uri: git@github.com:jeffdecola/concourse-resource-template.git
       branch: master
@@ -55,7 +55,7 @@ resources:
       
   - name: jeffs-test-resource
     type: jeffs-resource
-    icon: paperclip
+    icon: magnify
     source:
       source1: "source1 info"
       source2: "source2 info"
