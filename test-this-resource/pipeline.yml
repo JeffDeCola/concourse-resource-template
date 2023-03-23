@@ -55,7 +55,7 @@ resources:
       
   - name: jeffs-test-resource
     type: jeffs-resource
-    icon: 
+    icon: paperclip
     source:
       source1: "source1 info"
       source2: "source2 info"
