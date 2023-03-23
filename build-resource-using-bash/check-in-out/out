@@ -127,7 +127,7 @@ json_get_output='{
         { "name": "author", "value": "'$author'" },
         { "name": "author_date", "value": "'$author_date'" },
         { "name": "executable", "value": "out" },
-        { "name": "ref", "value": "'$version'" }
+        { "name": "version", "value": "'$version'" }
     ]
 }'
 jq -n "$json_get_output" > get_output.json
