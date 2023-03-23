@@ -68,6 +68,7 @@ echo "params are:"
 echo "    $param1"
 echo "    $param2"
 echo "    $param3"
+echo ""
 
 # SOME METATDATA
 echo "BUILD_ID = $BUILD_ID"

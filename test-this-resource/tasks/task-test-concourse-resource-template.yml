@@ -12,8 +12,8 @@ inputs:
   - name: concourse-resource-template
   - name: jeffs-test-resource
 
-#outputs:
-#  - name: concourse-resource-template-updated
+outputs:
+  - name: jeffs-test-resource
 
 run:
   path: ./concourse-resource-template/test-this-resource/scripts/test-concourse-resource-template.sh
