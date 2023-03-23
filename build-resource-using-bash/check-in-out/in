@@ -82,7 +82,7 @@ echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
 echo ""
 
 echo "PART 2 - GET SOMETHING ************************************************************************"
-echo "Mimic a fetch and place a fetched.json file in the working directory"
+echo "Mimic a fetch and place a get_fetched.json file in the working directory"
 echo "You have the source, params and fectched what you needed"
 echo ""
 
