@@ -20,8 +20,7 @@ fi
 echo "GOAL ----------------------------------------------------------------------------------"
 echo " "
 
-echo "You used your resoruce to get seomthing"
-echo "Not open the fetch.json file you put here"
+echo "To do something to the STUFF you got"
 echo " "
 
 echo "CHECK THINGS --------------------------------------------------------------------------"
@@ -54,7 +53,7 @@ cat get_fetch.json
 echo " "
 
 echo "Add a file for fun"
-echo 'This is a test' > job-test-concourse-resource-templat.txt
+echo 'This is a test' > job-test-concourse-resource-template.txt
 echo " "
 
 echo "ls directory"
