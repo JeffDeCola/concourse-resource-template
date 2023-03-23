@@ -52,7 +52,8 @@ and comes from the pipeline and the version comes from the check.
 
 #### PART 2 - Check/Update Version
 
-In this example, I will mimic a getting a new version and increment until version 5.
+In this example, I will mimic a getting a new version and increment until
+version 5.
 
 #### PART 3 - Output
 
