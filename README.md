@@ -32,9 +32,9 @@ A concourse resource is a docker image.
 
 It requires 3 kinds of scripts or executables,
 
-* **check** - Detecting new versions of the resource (e.g. git version)
-* **in** - Fetching something
-* **out** - Updating something
+* **check** - Detecting new versions of the STUFF (e.g. git version)
+* **in** - GET STUFF
+* **out** - PUT STUFF
 
 You build your resource with a Dockerfile by using the
 `concourse docker base image` and adding your scripts/executables to `/opt/resource`.
@@ -55,7 +55,7 @@ The three scripts/executables can be written with bash, go, etc.
 
 [check](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/check)
 is performed before anything can use the resource. It is used to
-determine if the resource has changed (checks version).
+determine if the STUFF has changed (checks version of STUFF).
 
 #### PART 1 - Input
 
@@ -77,7 +77,7 @@ and comes from the pipeline and the version comes from the check.
 
 #### PART 2 - Check/Update Version
 
-In this example, I will mimic a getting a new version and increment until ver 5.
+In this example, I will mimic a getting a new version and increment until version 5.
 
 #### PART 3 - Output
 
@@ -100,7 +100,7 @@ The
 is performed after a check has confirmed there is something there.
 For my resource,
 [in](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/in)
-will mimic **fetching a resource** and place a file in the working directory.
+will mimic **fetching STUFF** and place a file in the working directory.
 
 #### PART 1 - Input
 
@@ -127,7 +127,7 @@ and params come from the pipeline and the version comes from the check.
 
 #### PART 2 - GET Something
 
-In this example, I will mimic a fetch and place a file
+In this example, I will mimic a fetch some STUFF and place a file
 `get_fetch.json` in the working directory.
 
 #### PART 3 - Output
@@ -154,7 +154,7 @@ Input will send **stdout** that will be used in the next step in the pipeline.
 
 The
 [out](https://github.com/JeffDeCola/concourse-resource-template/blob/master/build-resource-using-bash/check-in-out/out)
-will mimic **updating a resource**
+will mimic **updating STUFF**
 and is performed after the task.
 
 #### PART 1 - Input
@@ -179,10 +179,10 @@ and params come from the pipeline.
 
 #### PART 2 - PUT Something
 
-In this example, I will mimic a push/deploy and place a file
+In this example, I will mimic a push/deploy to STUFF and place a file
 `put_fetch.json` in the working directory.
 
-It is important you must recheck version here. **So you must get it.**
+It is important you must recheck version here. **So you must get the version.**
 
 #### PART 3 - Output
 

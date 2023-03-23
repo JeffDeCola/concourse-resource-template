@@ -10,7 +10,7 @@ exec 3>&1           # Make stdout available as fd 3 for the result
 exec 1>&2           # Redirect all output to stderr for logging
 
 # WHAT IS THIS?
-echo "IN - GET"
+echo "OUT - PUT"
 echo ""
 
 # CURRENT DIRECTORY
@@ -45,19 +45,19 @@ echo ""
 # -M = Monochrome output
 # -S = Sort order
 # . =  get everything
-jq -M -S . <&0 | tee get_input.json >/dev/null    # tee redirects to a file.
+jq -M -S . <&0 | tee put_input.json >/dev/null    # tee redirects to a file.
 
 echo "json stdin is:"
-cat get_input.json
+cat put_input.json
 echo ""
 
-# PARSE THE JSON FILE get_input.json 
-source1=$(jq -r .source.source1 < get_input.json)
-source2=$(jq -r .source.source2 < get_input.json)
-source3=$(jq -r .source.source3 < get_input.json)
-param1=$(jq -r .params.param1 < get_input.json)
-param2=$(jq -r .params.param2 < get_input.json)
-param3=$(jq -r .params.param3 < get_input.json)
+# PARSE THE JSON FILE put_input.json 
+source1=$(jq -r .source.source1 < put_input.json)
+source2=$(jq -r .source.source2 < put_input.json)
+source3=$(jq -r .source.source3 < put_input.json)
+param1=$(jq -r .params.param1 < put_input.json)
+param2=$(jq -r .params.param2 < put_input.json)
+param3=$(jq -r .params.param3 < put_input.json)
 
 # PRINT OUT THE INPUT
 echo "source are:"
@@ -78,8 +78,8 @@ echo "ATC_EXTERNAL_URL = $ATC_EXTERNAL_URL"
 echo ""
 
 echo "PART 2 - PUT SOMETHING ************************************************************************"
-echo "Mimic a put and place a fetched.json file in the working directory"
-echo "You have the source, params and fectched what you needed"
+echo "Mimic a put and place a put_fetch.json file in the working directory"
+echo "You have the source, params"
 echo ""
 
 # MIMIC - MUST GET SAME VERSION TO CHECK - THIS IS NOT PASSED
@@ -121,7 +121,7 @@ echo "send stdout"
 echo ""
 
 # CREATE OUTPUT
-json_get_output='{
+json_put_output='{
     "version":{ "ref": "'$version'" },
     "metadata": [
         { "name": "author", "value": "'$author'" },
@@ -130,10 +130,10 @@ json_get_output='{
         { "name": "version", "value": "'$version'" }
     ]
 }'
-jq -n "$json_get_output" > get_output.json
+jq -n "$json_put_output" > put_output.json
 
 echo "json stdout is:"
-cat get_output.json
+cat put_output.json
 echo ""
 
 echo "ls directory"
@@ -142,4 +142,4 @@ echo ""
 
 # OUTPUT JSON TO STDOUT
 # -n don't read any input at all.  Construct froms scratch.
-jq -n "$json_get_output" >&3
+jq -n "$json_put_output" >&3
