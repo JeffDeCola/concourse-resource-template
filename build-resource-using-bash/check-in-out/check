@@ -76,7 +76,7 @@ then
 else
       # ADD 1 TO VERSION
       echo "Add 1 to version"
-      ((version=input_version+1))
+      ((version=version+1))
 fi
 
 echo "The version is $version"
