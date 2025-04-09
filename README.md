@@ -1,10 +1,9 @@
 # CONCOURSE RESOURCE TEMPLATE
 
 [![Tag Latest](https://img.shields.io/github/v/tag/jeffdecola/concourse-resource-template)](https://github.com/JeffDeCola/concourse-resource-template/tags)
-[![codeclimate Issue Count](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/concourse-resource-template/issues)
-[![Docker Pulls](https://badgen.net/docker/pulls/jeffdecola/concourse-resource-template?icon=docker&label=pulls)](https://hub.docker.com/r/jeffdecola/concourse-resource-template/)
-[![MIT License](https://img.shields.io/:license-mit-blue.svg)](https://jeffdecola.mit-license.org)
 [![jeffdecola.com](https://img.shields.io/badge/website-jeffdecola.com-blue)](https://jeffdecola.com)
+[![MIT License](https://img.shields.io/:license-mit-blue.svg)](https://jeffdecola.mit-license.org)
+[![Docker Pulls](https://badgen.net/docker/pulls/jeffdecola/concourse-resource-template?icon=docker&label=pulls)](https://hub.docker.com/r/jeffdecola/concourse-resource-template/)
 
 _Can be used as a template for developing a concourse resource._
 
@@ -42,12 +41,12 @@ You build your resource with a Dockerfile by using the
 The three scripts/executables can be written with bash, go, etc.
 
 * My go is build is located in
-  [/build-resource-using-go](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-go)
+  [/build-resource-using-go](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-go-in-development)
   _(In development)_
 * My bash build is located in
   [/build-resource-using-bash](https://github.com/JeffDeCola/concourse-resource-template/tree/master/build-resource-using-bash)
 
-![IMAGE - concourse-check-in-out-pipeline - IMAGE](docs/pics/concourse-check-in-out-pipeline.jpg)
+![IMAGE - concourse-check-in-out-pipeline - IMAGE](docs/pics/concourse-check-in-out-pipeline.svg)
 
 ---
 
