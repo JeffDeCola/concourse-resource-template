@@ -1,4 +1,4 @@
-# repo-concourse-resource-template-.gitignore
+# .gitignore
 
 # CONCOURSE SECRETS
 .concourse-secrets.yml
@@ -22,6 +22,8 @@ sftp.json
 # TAR FILES
 *.tar.gz
 *.tar.gz.gpg
+
+# repo-concourse-resource-template.gitignore SPECIFIC BELOW ---------------------------------------------
 
 # RUN (BINARIES)
 **/bin/concourse-resource-template
